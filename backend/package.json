@@ -1,0 +1,28 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Aplicacion para el administracion de una flota de buses",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mttzputnik/ProyectoFlota.git"
+  },
+  "keywords": [
+    "flota",
+    "buses",
+    "transporte"
+  ],
+  "author": "Mateo Fracica, Jon Vasquez, Stiven Osorio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mttzputnik/ProyectoFlota/issues"
+  },
+  "homepage": "https://github.com/Mttzputnik/ProyectoFlota#readme",
+  "dependencies": {
+    "@prisma/client": "^5.12.1",
+    "express": "^4.19.2"
+  }
+}
