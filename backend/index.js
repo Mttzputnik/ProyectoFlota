@@ -1,11 +1,22 @@
 const express = require('express');
 const app = express();
-require ('dotenv').config();
+require('dotenv').config();
 
-const port = 3000 || process.env.PORT;
+// Importar el controlador de usuario
+const userController = require('./src/controllers/UserController');
 
-app.listen(process.env.PORT, () => {
+// Middleware para parsear el body de las peticiones
+app.use(express.json());
+
+// Definir las rutas para las operaciones CRUD del usuario
+app.get('/users', userController.getAllUsers);
+app.post('/users', userController.createUser);
+app.get('/users/:id', userController.getUserById);
+app.put('/users/:id', userController.updateUserById);
+app.delete('/users/:id', userController.deleteUserById);
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
-
-
