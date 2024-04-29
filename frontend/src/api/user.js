@@ -1,22 +1,27 @@
 import { PATHS } from "../utils/config";
 
-export class User {
-    baseApi = PATHS.BASE_PATH;
-    newUserPath = PATHS.API_ROUTES.NEW_USER;
-    UserPath = PATHS.API_ROUTES.USER;
+const baseApi = PATHS.BASE_PATH;
+const newUserPath = PATHS.API_ROUTES.NEW_USER;
+const UserPath = PATHS.API_ROUTES.USERS;
 
-    createUser = async () => {
+export class User {
+    createUser = async (data) => {
         try {
-            console.log(`${this.baseApi}${userPath}`);
-            const response = await fetch(`${this.baseApi}${userPath}`,
-            {
+            const FormData= new FormData();
+
+            console.log(`${baseApi}${UserPath}`);
+            const URL = `${baseApi}${UserPath}`;
+            const params ={
                 method: POST,
                 body: FormData
-            }
-        )
+            };
+            console.log(params);
+            const response = await fetch(URL,params);       
             console.log(response);
+            const result =response.json();
+            console.log(result);
         } catch (error) {
-            
+            console.error(error);
         }
     }
 

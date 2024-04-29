@@ -1,4 +1,4 @@
-SERVER_IP = "http://localhost/3000"
+SERVER_IP = "://localhost/3000"
 
 export const PATHS = {
     BASE_PATH: `http${SERVER_IP}`,
