@@ -1,6 +1,11 @@
-import { combineReducers } from 'react-reduxredux';
+import {configureStore} from '@reduxjs/toolkit';
 
-const store = createStore();
+const store = configureStore({
+    reducer: {
+        user: userSlide,
+
+    }
+});
 
 
 export default store;
