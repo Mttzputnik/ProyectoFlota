@@ -1,16 +1,18 @@
 import { PATHS } from "../utils/config";
 
 const baseApi = PATHS.BASE_PATH;
-const newUserPath = PATHS.API_ROUTES.NEW_USER;
 const UserPath = PATHS.API_ROUTES.USERS;
+const newUserPath = PATHS.API_ROUTES.NEW_USER;
 
 export class User {
-    createUser = async (data) => {
+    createUser = async (FormData) => {
         try {
+            console.log("api",FormData)
             const FormData= new FormData();
 
-            console.log(`${baseApi}${UserPath}`);
-            const URL = `${baseApi}${UserPath}`;
+            console.log(`${baseApi}${newUserPath}`);
+            const URL = `${baseApi}/${newUserPath}`;
+            console.log(URL);
             const params ={
                 method: POST,
                 body: FormData
