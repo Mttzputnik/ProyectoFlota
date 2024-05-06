@@ -1,4 +1,6 @@
 import React, {userEffect} from 'react'
+import { useDispatch } from 'react-redux'
+import { AddUser } from '../../slices/userSlice'
 
 export const CreateUserComponent = () => {
 
