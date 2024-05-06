@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
+
 const initialState = {
   email: "",
   user_name: "",
@@ -11,7 +13,7 @@ const initialState = {
   updatedAt: "",
 };
 
-export const userSlide = createSlice({
+export const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
@@ -40,5 +42,5 @@ export const userSlide = createSlice({
     },
 });
 
-export const { addUser, getUsers, getUsersById, editUsersById, deleteUsersById } = userReducer.actions;
-export default userSlide.reducer;
+export const { addUser, getUsers, getUsersById, editUsersById, deleteUsersById } = userSlice.actions;
+export default userSlice.reducer;

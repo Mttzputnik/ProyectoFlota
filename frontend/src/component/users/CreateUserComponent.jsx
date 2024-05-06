@@ -37,6 +37,17 @@ const handleCreateUser = async (e)=> {
 
     console.log(formDataToSend);
 
+    await userApi.createUser(formDataToSend);
+    dispatch(AddUser(FormData));
+    setFormData({
+      email:"",
+      user_name:"",
+      last_name:"",
+      avatar:"",
+      active_user:false,
+      current_password:""
+    });
+
 
   } catch (error) {
     
