@@ -14,7 +14,7 @@ export class User {
             const URL = `${baseApi}/${newUserPath}`;
             console.log(URL);
             const params ={
-                method: POST,
+                method: 'POST',
                 body: FormData
             };
             console.log(params);
