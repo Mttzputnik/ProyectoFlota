@@ -10,7 +10,7 @@ const userController = {
       const users = await prisma.user.findMany();
       res.status(200).json(users);
     } catch (error) {
-      res.status(500).json({ error: 'Error al obtener los usuarios.' });
+      res.status(500).json({ error: 'Error al obtener los usuarios.' + error });
     }
   },
 
@@ -30,7 +30,7 @@ const userController = {
       });
       res.status(201).json(newUser);
     } catch (error) {
-      res.status(500).json({ error: 'Error al crear el usuario.' });
+      res.status(500).json({ error: 'Error al crear el usuario.' + error });
     }
   },
 
@@ -44,11 +44,11 @@ const userController = {
         }
       });
       if (!user) {
-        return res.status(404).json({ error: 'Usuario no encontrado.' });
+        return res.status(404).json({ error: 'Usuario no encontrado.' + error});
       }
       res.status(200).json(user);
     } catch (error) {
-      res.status(500).json({ error: 'Error al obtener el usuario.' });
+      res.status(500).json({ error: 'Error al obtener el usuario.' + error });
     }
   },
 
@@ -72,7 +72,7 @@ const userController = {
       });
       res.status(200).json(updatedUser);
     } catch (error) {
-      res.status(500).json({ error: 'Error al actualizar el usuario.' });
+      res.status(500).json({ error: 'Error al actualizar el usuario.' + error});
     }
   },
 
@@ -87,7 +87,7 @@ const userController = {
       });
       res.status(204).send();
     } catch (error) {
-      res.status(500).json({ error: 'Error al eliminar el usuario.' });
+      res.status(500).json({ error: 'Error al eliminar el usuario.' + error });
     }
   }
 };
