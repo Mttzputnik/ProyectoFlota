@@ -6,13 +6,13 @@ const initialState = {
   user_name: "",
   lastname: "",
   avatar: "",
-  active_user: "",
+  active_user: false,
   current_password: "",
   createdAt: "",
   updatedAt: "",
 };
 
-const userSlice = createSlice({
+export const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {

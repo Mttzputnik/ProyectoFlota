@@ -1,24 +1,39 @@
 const express = require('express');
+const userRoutes = require("./src/routes/user_routes");
+const bodyParser = require("body-parser");
 const cors = require('cors');
+require( 'dotenv' ).config() ;
+
 const app = express();
+app.use(bodyParser.json());
 app.use(cors());
-require('dotenv').config();
 
-// Importar el controlador de usuario
-const userController = require('./src/controllers/UserController');
 
-// Middleware para parsear el body de las peticiones
+// Middleware para el manejo de datos
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Definir las rutas para las operaciones CRUD del usuario
-app.get('/users', userController.getAllUsers);
-app.post('/users/new', userController.createUser);
-app.get('/users/:id', userController.getUserById);
-app.put('/users/:id', userController.updateUserById);
-app.delete('/users/:id', userController.deleteUserById);
 
-const port = process.env.PORT || 3000;
+// rutas para las operaciones del CRUD de usuarios
+app.use('/users', userRoutes);
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+
+
+//comprobar la conexion a la base de datos
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
+prisma.$connect()
+.then(() => {
+    console.log("Conectado a la base de datos");
+})
+.catch((error) => {
+    console.error(`Error al conectar a la base de datos: ${error}`);
+});
+
+  
+
+// iniciar el servidor
+const CONNECTION_PORT = process.env.PORT || 3001;
+app.listen(CONNECTION_PORT,()=>{
+    console.log(`El server se esta ejecutando en el puerto: ${CONNECTION_PORT}`);
 });
