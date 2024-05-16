@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { User } from "../../api/user";
-import { getUsers, editUserById, deleteUserById } from "../../slices/userSlice";
+import { getUsers, editUsersById, deleteUsersById } from "../../slices/userSlice";
 import {
   Table,
   Avatar,
@@ -51,9 +51,9 @@ export const ListComponent = () => {
       content: "Esta opción no se puede revertir",
       onOk() {
         userApi
-          .deleteUserById(id)
+          .deleteUsersById(id)
           .then(() => {
-            dispatch(deleteUserById(id));
+            dispatch(deleteUsersById(id));
           })
           .catch((error) => {
             console.error("Failed to delete user", error);
@@ -72,10 +72,10 @@ export const ListComponent = () => {
 
   const handleOk = () => {
     userApi
-      .editUserById(selectedUser.id, selectedUser)
+      .editUsersById(selectedUser.id, selectedUser)
       .then((result) => {
         dispatch(
-          editUserById({ userId: selectedUser.id, updatedUserData: result })
+          editUsersById({ userId: selectedUser.id, updatedUserData: result })
         );
         setIsModalVisible(false);
         setSelectedUser(null);

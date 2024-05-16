@@ -1,8 +1,8 @@
 import './App.css';
-import { CreateUserComponent } from './component/users/CreateUserComponent';
+import { ListComponent } from './component/users/ListComponent';
 
 function App() {
-  return <CreateUserComponent></CreateUserComponent>
+  return <ListComponent></ListComponent>
 }
 
 export default App;
