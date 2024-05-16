@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { User } from "../../api/user";
-import { getUsers, editUsersById, deleteUsersById } from "../../slices/userSlice";
+import { getUsers, editUserById, deleteUsersById } from "../../slices/userSlice";
 import {
   Table,
   Avatar,
@@ -72,10 +72,10 @@ export const ListComponent = () => {
 
   const handleOk = () => {
     userApi
-      .editUsersById(selectedUser.id, selectedUser)
+      .editUserById(selectedUser.id, selectedUser)
       .then((result) => {
         dispatch(
-          editUsersById({ userId: selectedUser.id, updatedUserData: result })
+          editUserById({ userId: selectedUser.id, updatedUserData: result })
         );
         setIsModalVisible(false);
         setSelectedUser(null);

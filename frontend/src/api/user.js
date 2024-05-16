@@ -50,7 +50,9 @@ export class User {
 
   editUserById = async (userId, updatedData) => {
     try {
-      const URL = `${this.BASE_PATH}/${this.EDIT_USER}/${userId}`;
+        console.log('entra al edit');
+        console.log(updatedData);
+      const URL = `${this.BASE_PATH}${this.EDIT_USER}/${userId}`;
       console.log(URL);
       const params = {
         method: "PATCH",
