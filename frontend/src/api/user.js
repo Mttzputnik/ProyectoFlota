@@ -70,8 +70,6 @@ export class User {
             return result;
         } catch (error) {
             console.error(error);
-        } catch (error) {
-
         }
     };
 
@@ -105,5 +103,4 @@ getUserByIdAndDelete = async () => {
     } catch (error) {
 
     }
-}
 }
