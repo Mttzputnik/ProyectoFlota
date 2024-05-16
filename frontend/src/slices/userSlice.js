@@ -6,7 +6,7 @@ const initialState = {
   user_name: "",
   lastname: "",
   avatar: "",
-  active_user: "false",
+  active_user: false,
   current_password: "",
   createdAt: "",
   updatedAt: "",
