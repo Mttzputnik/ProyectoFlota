@@ -34,10 +34,20 @@ export const userSlice = createSlice({
             state.active_user = active_user;
             state.current_password = current_password;
         },
-        getUsers: (state, action) => {},
-        getUsersById: (state, action) => {},
-        editUsersById: (state, action) => {},
-        deleteUsersById: (state, action) => {},
+        getUsersById: (state, action) => {
+            console.log("getUsersById action triggered with id", action.payload);
+        },
+        editUsersById: (state, action) => {
+            const {updatedUserData} = action.payload;
+            return{
+                ...state,
+                ...updatedUserData,
+            };
+        },
+        
+        deleteUsersById: (state, action) => {
+            return initialState;
+        },
     },
 });
 
