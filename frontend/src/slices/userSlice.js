@@ -34,6 +34,9 @@ export const userSlice = createSlice({
             state.active_user = active_user;
             state.current_password = current_password;
         },
+        getUsers: (state,action)=> {
+            state.users= action.payload;
+        },
         getUsersById: (state, action) => {
             console.log("getUsersById action triggered with id", action.payload);
         },

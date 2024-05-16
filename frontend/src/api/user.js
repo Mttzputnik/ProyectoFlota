@@ -26,7 +26,7 @@ export class User {
   
   getUsers = async () => {
     try {
-      const URL = `${this.BASE_PATH}/${this.USERS}`;
+      const URL = `${this.BASE_PATH}${this.USERS}`;
       console.log(URL);
       const response = await fetch(URL);
       const users = await response.json();
