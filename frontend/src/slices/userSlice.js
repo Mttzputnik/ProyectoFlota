@@ -37,13 +37,14 @@ export const userSlice = createSlice({
         getUsersById: (state, action) => {
             console.log("getUsersById action triggered with id", action.payload);
         },
-        editUsersById: (state, action) => {
-            const {updatedUserData} = action.payload;
-            return{
-                ...state,
-                ...updatedUserData,
+        editUserById: (state, action) => {
+            const { updatedUserData } = action.payload;
+            return {
+              ...state,
+              ...updatedUserData, 
             };
-        },
+          },
+      
         
         deleteUsersById: (state, action) => {
             return initialState;
