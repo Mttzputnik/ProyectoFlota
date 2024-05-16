@@ -24,22 +24,63 @@ export class User {
         } catch (error) {
             console.error(error);
         }
-    }
+    };
 
     getUsers = async() => {
         try {
-            
-        } catch (error) {
-            
-        }
-    }
+            const URL = `${this.BASE_PATH}/${this.UserPath}`;
+            console.log(URL);
+            const response = await fetch(URL);
+            const users = response.json();
+            return users;
+          } catch (error) {
+            console.error(error);
+          }
+        };
 
-    getUsersById = async() => {
+    getUsersById = async(userId) => {
         try {
-        
+            const URL = `${this.BASE_PATH}/${this.USERS}/${userId}`;
+            console.log(URL);
+            const response = await fetch(URL);
+            const user = response.json();
+            return user;
     } catch (error) {
-        
-    }}
+        console.error(error);
+    }};
+
+    editUsersById = async(userId, FormData) => {
+        try {
+            const URL = `${this.BASE_PATH}/${this.USERS}/${userId}`;
+            console.log(URL);
+            const params = {
+                method: 'PUT',
+                body: JSON.stringify(FormData),
+            };
+            const response = await fetch(URL, params);
+            const result =await response.json();
+            console.log(result);
+            return result;
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    deleteUsersById = async(userId) => {
+        try {
+            const URL = `${this.BASE_PATH}/${this.USERS}/${userId}`;
+            console.log(URL);
+            const params = {
+                method: 'DELETE',
+            };
+            const response = await fetch(URL, params);
+            const message =await response.text();
+            console.log(message);
+            return message;
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     getUsersByIdAndUpdate = async() => {
         try {
