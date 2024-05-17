@@ -2,15 +2,17 @@ const userController = require('../controllers/userController');
 const express = require("express");
 const router = express.Router();
 const multer = require('multer');
+const path = require('path');
 
+// Configurar almacenamiento de Multer
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "uploads/avatars");
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname)
-    }
-})
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../../uploads/avatars"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)); // Renombrar el archivo para evitar conflictos
+  }
+});
 const upload = multer({ storage: storage });
 
 // Rutas para las operaciones del CRUD de usuarios

@@ -18,7 +18,7 @@ model User {
   email            String   @unique
   user_name        String?
   last_name         String?
-  avatar           String
+  avatar           String?
   active_user      Boolean
   current_password String
   createdAt        DateTime @default(now())
