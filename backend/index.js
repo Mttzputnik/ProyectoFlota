@@ -2,6 +2,7 @@ const express = require('express');
 const userRoutes = require("./src/routes/user_routes");
 const bodyParser = require("body-parser");
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -12,10 +13,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Servir archivos estáticos desde el directorio uploads
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Rutas para las operaciones del CRUD de usuarios
 app.use('/users', userRoutes);
 
-// Conexión a la base de datos
+// Comprobar la conexión a la base de datos
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 prisma.$connect()

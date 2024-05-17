@@ -77,11 +77,16 @@ export const ListComponent = () => {
         dispatch(editUserById({ userId: selectedUser.id, updatedUserData: result }));
         setIsModalVisible(false);
         setSelectedUser(null);
+        // Actualizar la lista de usuarios después de la edición
+        userApi.getUsers().then((usersData) => {
+          dispatch(getUsers(usersData));
+        });
       })
       .catch((error) => {
         console.error("Failed to edit user", error);
       });
   };
+  
 
   const handleChange = (e) => {
     setSelectedUser({
@@ -110,7 +115,10 @@ export const ListComponent = () => {
       title: "Avatar",
       dataIndex: "avatar",
       key: "avatar",
-      render: (text, record) => <Avatar src={record.avatar} />,
+      render: (text, record) => {
+        const imageUrl = record.avatar ? `${userApi.BASE_PATH}${record.avatar}` : null;
+        return <Avatar src={imageUrl} />;
+      },
     },
     {
       title: "Email",
@@ -156,7 +164,7 @@ export const ListComponent = () => {
       ),
     },
   ];
-
+  
   return (
     <div className="container">
       <h2>Users List</h2>

@@ -53,11 +53,13 @@ const getUser = async (req, res) => {
   }
 };
 
+const path = require('path');
+
 // Actualizar un usuario por id
 const editUser = async (req, res) => {
   const { id } = req.params;
   const { email, user_name, last_name, active_user, current_password } = req.body;
-  const avatar = req.file ? req.file.filename : null;
+  const avatar = req.file ? `/uploads/avatars/${req.file.filename}` : null;
 
   console.log('Archivo recibido:', req.file);
   console.log('Datos recibidos:', req.body);
