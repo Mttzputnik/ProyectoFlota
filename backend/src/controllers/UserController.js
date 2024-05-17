@@ -1,26 +1,22 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-// obtener todos los usuarios
+// Obtener todos los usuarios
 const listUsers = async (req, res) => {
   try {
     const users = await prisma.user.findMany();
     res.status(200).json(users);
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ error: `error al obtener todos los usuarios ${error}` });
+    res.status(500).json({ error: `Error al obtener todos los usuarios ${error}` });
   }
 };
 
 // Crear un nuevo usuario
 const createUser = async (req, res) => {
-  const { email, user_name, last_name, active_user, current_password } =
-    req.body;
-
+  const { email, user_name, last_name, active_user, current_password } = req.body;
   const avatar = req.file ? req.file.filename : null;
-  console.log(`archivo de imagen: ${avatar}`);
+  console.log(`Archivo de imagen: ${avatar}`);
 
   try {
     const newUser = await prisma.user.create({
@@ -29,15 +25,10 @@ const createUser = async (req, res) => {
         user_name,
         last_name,
         avatar,
-        active_user: true,
+        active_user: active_user === 'true', // Convertir string a boolean
         current_password,
-        
       },
     });
-
-    console.log(req.body);
-    console.log(newUser);
-    
     res.status(200).json(newUser);
   } catch (error) {
     console.log(error);
@@ -45,73 +36,70 @@ const createUser = async (req, res) => {
   }
 };
 
-// obtener un usuario por id
+// Obtener un usuario por id
 const getUser = async (req, res) => {
   const { id } = req.params;
-
   try {
     const user = await prisma.user.findUnique({
-      where: {
-        id: id,
-      },
+      where: { id: id },
     });
     if (!user) {
-      return res.status(404).json({ error: `Usario no encontrado ${error}` });
+      return res.status(404).json({ error: `Usuario no encontrado` });
     }
     res.status(200).json(user);
   } catch (error) {
     console.error(error);
-    res.status(500).json({error: `Error al obtener el usuario ${error}`});
+    res.status(500).json({ error: `Error al obtener el usuario ${error}` });
   }
 };
 
-// actualizar un usuario por id
+// Actualizar un usuario por id
 const editUser = async (req, res) => {
   const { id } = req.params;
-  const { email, user_name, last_name, active_user, current_password } =
-    req.body;
-
+  const { email, user_name, last_name, active_user, current_password } = req.body;
   const avatar = req.file ? req.file.filename : null;
-  console.log(avatar);
+
+  console.log('Archivo recibido:', req.file);
+  console.log('Datos recibidos:', req.body);
 
   try {
+    const updateData = {
+      email,
+      user_name,
+      last_name,
+      active_user: active_user === 'true',
+      current_password,
+    };
+
+    if (avatar) {
+      updateData.avatar = avatar;
+    }
+
     const user = await prisma.user.update({
       where: { id: id },
-      data: {
-        email,
-        user_name,
-        last_name,
-        avatar,
-        active_user: true,
-        current_password,
-      },
+      data: updateData,
     });
+
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: `Error al actualizar el usuario ${error}`});
+    res.status(500).json({ error: `Error al actualizar el usuario: ${error.message}` });
   }
 };
 
-// eliminar un usuario por id
+// Eliminar un usuario por id
 const deleteUser = async (req, res) => {
   const { id } = req.params;
-
   try {
-    await prisma.Users.delete({
-      where: {
-        id: id,
-      },
+    await prisma.user.delete({
+      where: { id: id },
     });
-
     res.status(200).json({ message: "Usuario eliminado correctamente" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: `Error al eliminar el usuario ${error}`});
+    res.status(500).json({ error: `Error al eliminar el usuario ${error}` });
   }
 };
-
-
 
 module.exports = {
   createUser,

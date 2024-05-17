@@ -8,16 +8,13 @@ export class User {
 
   createUser = async (formData) => {
     try {
-      console.log("api", formData);
       const URL = `${this.BASE_PATH}/${this.NEW_USERS}`;
-      console.log(URL);
       const params = {
         method: "POST",
         body: formData,
       };
       const response = await fetch(URL, params);
-      const result = await response.json();
-      console.log(result);
+      return await response.json();
     } catch (error) {
       console.error(error);
       throw error; 
@@ -27,10 +24,8 @@ export class User {
   getUsers = async () => {
     try {
       const URL = `${this.BASE_PATH}${this.USERS}`;
-      console.log(URL);
       const response = await fetch(URL);
-      const users = await response.json();
-      return users; 
+      return await response.json();
     } catch (error) {
       console.error(error);
     }
@@ -39,10 +34,8 @@ export class User {
   getUserById = async (userId) => {
     try {
       const URL = `${this.BASE_PATH}/${this.USERS}/${userId}`;
-      console.log(URL);
       const response = await fetch(URL);
-      const user = await response.json();
-      return user; 
+      return await response.json();
     } catch (error) {
       console.error(error);
     }
@@ -50,16 +43,19 @@ export class User {
 
   editUserById = async (userId, updatedData) => {
     try {
-      const URL = `${this.BASE_PATH}/${this.EDIT_USER}/${userId}`;
-      console.log(URL);
+      const URL = `${this.BASE_PATH}${this.EDIT_USER}/${userId}`;
+      const formData = new FormData();
+      for (const key in updatedData) {
+        formData.append(key, updatedData[key]);
+      }
+
       const params = {
         method: "PATCH",
-        body: JSON.stringify(updatedData),
+        body: formData,
       };
+
       const response = await fetch(URL, params);
-      const result = await response.json();
-      console.log(result);
-      return result;
+      return await response.json();
     } catch (error) {
       console.error(error);
     }
@@ -68,14 +64,11 @@ export class User {
   deleteUserById = async (userId) => {
     try {
       const URL = `${this.BASE_PATH}/${this.USERS}/delete/${userId}`;
-      console.log(URL);
       const params = {
         method: "DELETE",
       };
       const response = await fetch(URL, params);
-      const message = await response.text(); // Convert response to text
-      console.log(message);
-      return message; 
+      return await response.text();
     } catch (error) {
       console.error(error);
     }

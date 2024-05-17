@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { User } from "../../api/user";
-import { getUsers, editUsersById, deleteUsersById } from "../../slices/userSlice";
+import { getUsers, editUserById, deleteUsersById } from "../../slices/userSlice";
 import {
   Table,
   Avatar,
@@ -51,7 +51,7 @@ export const ListComponent = () => {
       content: "Esta opción no se puede revertir",
       onOk() {
         userApi
-          .deleteUsersById(id)
+          .deleteUserById(id)
           .then(() => {
             dispatch(deleteUsersById(id));
           })
@@ -72,11 +72,9 @@ export const ListComponent = () => {
 
   const handleOk = () => {
     userApi
-      .editUsersById(selectedUser.id, selectedUser)
+      .editUserById(selectedUser.id, selectedUser)
       .then((result) => {
-        dispatch(
-          editUsersById({ userId: selectedUser.id, updatedUserData: result })
-        );
+        dispatch(editUserById({ userId: selectedUser.id, updatedUserData: result }));
         setIsModalVisible(false);
         setSelectedUser(null);
       })
@@ -96,6 +94,14 @@ export const ListComponent = () => {
     setSelectedUser({
       ...selectedUser,
       active_user: checked,
+    });
+  };
+
+  const handleUploadChange = (info) => {
+    const file = info.file.originFileObj || info.file;
+    setSelectedUser({
+      ...selectedUser,
+      avatar: file,
     });
   };
 
@@ -192,12 +198,8 @@ export const ListComponent = () => {
             <Form.Item label="Avatar">
               <Upload
                 accept="image/*"
-                beforeUpload={(file) => {
-                  return false;
-                }}
-                onChange={(info) => {
-                  console.log(info.fileList);
-                }}
+                beforeUpload={() => false}
+                onChange={handleUploadChange}
                 fileList={[]}>
                 <Button icon={<UploadOutlined />}>Seleccionar archivo</Button>
               </Upload>
