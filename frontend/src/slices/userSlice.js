@@ -10,6 +10,7 @@ const initialState = {
   current_password: "",
   createdAt: "",
   updatedAt: "",
+  role: "",
 };
 
 export const userSlice = createSlice({
@@ -24,6 +25,7 @@ export const userSlice = createSlice({
             avatar,
             active_user,
             current_password,
+            role,
             } = action.payload;
             console.log(action.payload);
 
@@ -33,6 +35,7 @@ export const userSlice = createSlice({
             state.avatar = avatar;
             state.active_user = active_user;
             state.current_password = current_password;
+            state.role = role;
         },
         getUsers: (state,action)=> {
             state.users= action.payload;

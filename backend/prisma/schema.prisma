@@ -23,4 +23,6 @@ model User {
   current_password String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+  role             String   
+
 }
