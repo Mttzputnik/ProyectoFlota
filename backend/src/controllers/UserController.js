@@ -8,14 +8,17 @@ const listUsers = async (req, res) => {
     res.status(200).json(users);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: `Error al obtener todos los usuarios ${error}` });
+    res
+      .status(500)
+      .json({ error: `Error al obtener todos los usuarios ${error}` });
   }
 };
 
 // Crear un nuevo usuario
 const createUser = async (req, res) => {
-  const { email, user_name, last_name, active_user, current_password } = req.body;
-  const avatar = req.file ? req.file.filename : null;
+  const { email, user_name, last_name, active_user, current_password, role } =
+    req.body;
+  const avatar = req.file ? req.file.filename : "default-avatar.png"; // Si no se proporciona un avatar, usa 'default-avatar.jpg'
   console.log(`Archivo de imagen: ${avatar}`);
 
   try {
@@ -25,8 +28,9 @@ const createUser = async (req, res) => {
         user_name,
         last_name,
         avatar,
-        active_user: active_user === 'true', // Convertir string a boolean
+        active_user: active_user === "true", // Convertir string a boolean
         current_password,
+        role,
       },
     });
     res.status(200).json(newUser);
@@ -56,19 +60,21 @@ const getUser = async (req, res) => {
 // Actualizar un usuario por id
 const editUser = async (req, res) => {
   const { id } = req.params;
-  const { email, user_name, last_name, active_user, current_password } = req.body;
+  const { email, user_name, last_name, active_user, current_password, role } =
+    req.body;
   const avatar = req.file ? req.file.filename : null;
 
-  console.log('Archivo recibido:', req.file);
-  console.log('Datos recibidos:', req.body);
+  console.log("Archivo recibido:", req.file);
+  console.log("Datos recibidos:", req.body);
 
   try {
     const updateData = {
       email,
       user_name,
       last_name,
-      active_user: active_user === 'true',
+      active_user: active_user === "true",
       current_password,
+      role,
     };
 
     if (avatar) {
@@ -83,7 +89,9 @@ const editUser = async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: `Error al actualizar el usuario: ${error.message}` });
+    res
+      .status(500)
+      .json({ error: `Error al actualizar el usuario: ${error.message}` });
   }
 };
 
