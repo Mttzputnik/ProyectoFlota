@@ -1,8 +1,14 @@
 import './App.css';
-import { ListComponent } from './component/users/ListComponent';
+import { BrowserRouter } from 'react-router-dom';
+import { AdminRoutes } from './routes/AdminRoutes';
 
 function App() {
-  return <ListComponent></ListComponent>
+  return (
+    <BrowserRouter>
+      <AdminRoutes />
+    </BrowserRouter>
+    
+  );
 }
 
 export default App;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { User } from "../../api/user";
-import { getUsers, editUserById, deleteUsersById } from "../../slices/userSlice";
+import { User } from "../../../api/user";
+import { getUsers, editUserById, deleteUsersById } from "../../../slices/userSlice";
 import {
   Table,
   Avatar,
