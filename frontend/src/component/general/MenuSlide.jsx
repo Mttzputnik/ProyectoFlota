@@ -1,33 +1,42 @@
+// MenuSlide.jsx
 import React, { useState } from 'react';
-import { createRoot } from 'react-dom/client';
 import { Menu } from 'antd';
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+import { CarOutlined, UserOutlined, OrderedListOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import './MenuSlide.css';
 
 export const MenuSlide = () => {
+  const navigate = useNavigate();
+
   const onClick = ({ key }) => {
     console.log("key", key);
+    if (key === 'users') {
+      navigate('/admin/users');
+    } else if (key === 'vehiculo') {
+      navigate('/admin/vehicles');
+    }
   };
 
   const items = [
     {
       key: "sub1",
       label: "Usuarios",
-      icon: <MailOutlined />,
+      icon: <UserOutlined />,
       children: [
         {
-          key: "g1",
+          key: "users",
           label: "Users",
         },
       ],
     },
     {
       key: "sub2",
-      label: "Navigation Two",
-      icon: <AppstoreOutlined />,
+      label: "Vehículos",
+      icon: <CarOutlined />,
       children: [
         {
-          key: "5",
-          label: "Option 5",
+          key: "vehiculo",
+          label: "Tareas de vehículos",
         },
       ],
     },
@@ -36,8 +45,8 @@ export const MenuSlide = () => {
     },
     {
       key: "sub4",
-      label: "Navigation Three",
-      icon: <SettingOutlined />,
+      label: "Tareas",
+      icon: <OrderedListOutlined />,
       children: [
         {
           key: "9",
@@ -51,12 +60,12 @@ export const MenuSlide = () => {
       type: "group",
       children: [
         {
-          key: "13",
-          label: "Option 13",
+          key: "1",
+          label: "Option 1",
         },
         {
-          key: "14",
-          label: "Option 14",
+          key: "2",
+          label: "Option 2",
         },
       ],
     },
@@ -80,45 +89,40 @@ export const MenuSlide = () => {
 
   const levelKeys = getLevelKeys(items);
 
-  const App = () => {
-    const [stateOpenKeys, setStateOpenKeys] = useState(['2', '23']);
-    const onOpenChange = (openKeys) => {
-      const currentOpenKey = openKeys.find((key) => stateOpenKeys.indexOf(key) === -1);
-      // open
-      if (currentOpenKey !== undefined) {
-        const repeatIndex = openKeys
-          .filter((key) => key !== currentOpenKey)
-          .findIndex((key) => levelKeys[key] === levelKeys[currentOpenKey]);
-        setStateOpenKeys(
-          openKeys
-            // remove repeat key
-            .filter((_, index) => index !== repeatIndex)
-            // remove current level all child
-            .filter((key) => levelKeys[key] <= levelKeys[currentOpenKey]),
-        );
-      } else {
-        // close
-        setStateOpenKeys(openKeys);
-      }
-    };
-
-    return (
-      <Menu
-        mode="inline"
-        defaultSelectedKeys={['231']}
-        openKeys={stateOpenKeys}
-        onOpenChange={onOpenChange}
-        style={{
-          width: 256,
-        }}
-        items={items}
-      />
-    );
+  const [stateOpenKeys, setStateOpenKeys] = useState(['2', '23']);
+  const onOpenChange = (openKeys) => {
+    const currentOpenKey = openKeys.find((key) => stateOpenKeys.indexOf(key) === -1);
+    // open
+    if (currentOpenKey !== undefined) {
+      const repeatIndex = openKeys
+        .filter((key) => key !== currentOpenKey)
+        .findIndex((key) => levelKeys[key] === levelKeys[currentOpenKey]);
+      setStateOpenKeys(
+        openKeys
+          // remove repeat key
+          .filter((_, index) => index !== repeatIndex)
+          // remove current level all child
+          .filter((key) => levelKeys[key] <= levelKeys[currentOpenKey]),
+      );
+    } else {
+      // close
+      setStateOpenKeys(openKeys);
+    }
   };
 
-  const mountNode = document.getElementById('root'); // Define correctamente mountNode
-
-  createRoot(mountNode).render(<App />);
+  return (
+    <Menu
+      mode="inline"
+      defaultSelectedKeys={['231']}
+      openKeys={stateOpenKeys}
+      onOpenChange={onOpenChange}
+      onClick={onClick}
+      style={{
+        width: 256,
+      }}
+      items={items}
+    />
+  );
 };
 
 export default MenuSlide;

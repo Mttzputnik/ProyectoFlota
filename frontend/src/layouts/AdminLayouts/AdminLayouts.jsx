@@ -1,22 +1,20 @@
-import React from 'react'
-import { MenuSlide } from '../../component/general/MenuSlide'
+import React from 'react';
+import { MenuSlide } from '../../component/general/MenuSlide';
 
-export const AdminLayouts = (props) => {
-    const {Children} = props.children;
+export const AdminLayouts = ({ children }) => {
   return (
     <div className='admin-layout'>
-        <div className='admin-layout-left'>
-            <img src="" alt="" />
-            <MenuSlide />
-        </div>
-        <div className='admin-layout-right'>
-            <div className='admin-layout-right-header'>
-                <span>Dashboard</span>
-            </div>
+      <div className='admin-layout-left'>
+        <MenuSlide />
+      </div>
+      <div className='admin-layout-right'>
+        <div className='admin-layout-right-header'>
+          <span>Dashboard</span>
         </div>
         <div className='admin-layout-content'>
-            {Children}
+          {children}
         </div>
+      </div>
     </div>
-  )
-}
+  );
+};

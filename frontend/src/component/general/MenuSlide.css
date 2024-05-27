@@ -1,0 +1,18 @@
+.admin-layout {
+    display: flex;
+  }
+  
+  .admin-layout-left {
+    width: 250px; /* Ancho del menú */
+    flex: 0 0 auto; /* El menú no crece ni encoge */
+    background-color: #f0f0f0; /* Color de fondo opcional */
+  }
+  
+  .admin-layout-right {
+    flex: 1; /* El área de contenido ocupa el espacio restante */
+  }
+  
+  .admin-layout-content {
+    padding: 20px; /* Espacio interior para el contenido */
+  }
+  
