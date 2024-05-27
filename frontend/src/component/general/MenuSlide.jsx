@@ -12,8 +12,14 @@ export const MenuSlide = () => {
     console.log("key", key);
     if (key === 'users') {
       navigate('/admin/users');
-    } else if (key === 'vehiculo') {
+    } else if (key === 'taskvehiculo') {
       navigate('/admin/vehicles');
+    }
+    else if (key === 'listVehicles') {
+      navigate('/admin/listVehicles');
+    }
+    else if (key === 'addVehicles') {
+      navigate('/admin/addVehicles');
     }
   };
 
@@ -35,8 +41,16 @@ export const MenuSlide = () => {
       icon: <CarOutlined />,
       children: [
         {
-          key: "vehiculo",
+          key: "taskvehiculo",
           label: "Tareas de vehículos",
+        },
+        {
+          key: "listVehicles",
+          label: "lista de vehículos",
+        },
+        {
+          key: "addVehicles",
+          label: "agregar vehículos",
         },
       ],
     },

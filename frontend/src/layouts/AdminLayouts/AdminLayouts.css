@@ -1,0 +1,73 @@
+/* AdminLayouts.css */
+.menu-slide-title {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    margin: 3px;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #e0e0e0;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.admin-layout {
+    display: flex;
+    height: 100vh;
+    /* Para que ocupe toda la altura de la pantalla */
+}
+
+.admin-layout-left {
+    width: 256px;
+    /* Ancho del menú */
+    background-color: #f0f0f0;
+    /* Color de fondo opcional */
+    position: fixed;
+    /* Fija el menú en la parte izquierda de la pantalla */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    /* Añadir scroll si el contenido del menú es muy largo */
+}
+
+.admin-layout-right {
+    margin-left: 256px;
+    /* Para que el contenido no quede debajo del menú */
+    flex: 1;
+    /* El área de contenido ocupa el espacio restante */
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-layout-content {
+    padding: 10px;
+    /* Espacio interior para el contenido */
+    flex: 1;
+    overflow: auto;
+    /* Para manejar el desbordamiento de contenido */
+}
+
+@media (max-width: 768px) {
+    .admin-layout-left {
+        width: 200px;
+        /* Ajusta el ancho del menú en pantallas más pequeñas */
+    }
+
+    .admin-layout-right {
+        margin-left: 200px;
+        /* Ajusta el margen en pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-layout-left {
+        width: 150px;
+        /* Ajusta el ancho del menú en pantallas muy pequeñas */
+    }
+
+    .admin-layout-right {
+        margin-left: 150px;
+        /* Ajusta el margen en pantallas muy pequeñas */
+    }
+}
