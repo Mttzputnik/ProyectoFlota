@@ -17,10 +17,27 @@ model User {
   id               String   @id @default(auto()) @map("_id") @db.ObjectId
   email            String   @unique
   user_name        String?
-  last_name         String?
+  last_name        String?
   avatar           String?
   active_user      Boolean
   current_password String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+  role             String
+  tasks            Task[]
+}
+
+model Task {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  idUser String @db.ObjectId
+  user    User   @relation(fields: [idUser], references: [id])
+  idList String @db.ObjectId
+  list List  @relation(fields: [idList], references: [id])
+  desc String
+}
+
+model List{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  tasks            Task[]
 }

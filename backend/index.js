@@ -1,11 +1,11 @@
 const express = require('express');
 const userRoutes = require("./src/routes/user_routes");
-const bodyParser = require("body-parser");
+const taskRoutes = require("./src/routes/task_routes");
+const listRoutes = require("./src/routes/list_routes");
 const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-app.use(bodyParser.json());
 app.use(cors());
 
 // Middleware para el manejo de datos
@@ -14,6 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rutas para las operaciones del CRUD de usuarios
 app.use('/users', userRoutes);
+app.use('/tasks', taskRoutes);
+app.use('/lists', listRoutes);
 
 // Conexión a la base de datos
 const { PrismaClient } = require("@prisma/client");
