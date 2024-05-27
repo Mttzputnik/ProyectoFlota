@@ -2,7 +2,7 @@ import React from 'react'
 import DragAndDrop from '../../../component/drivers/TaskDrivers';
 
 
-export const vehicle = () => {
+export const Vehicle = () => {
   return (
     <DragAndDrop />
   )
