@@ -17,6 +17,7 @@ const listList = async (req, res) => {
 // Crear un nuevo list
 const createList = async (req, res) => {
   const { name } = req.body;
+  console.log("Received name:", name); // Esto te mostrará qué está recibiendo del cliente
 
   try {
     const newList = await prisma.list.create({

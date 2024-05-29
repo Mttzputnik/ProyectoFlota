@@ -25,6 +25,7 @@ model User {
   updatedAt        DateTime @updatedAt
   role             String
   tasks            Task[]
+  trips              Trip[]
 }
 
 model Task {
@@ -40,4 +41,86 @@ model List{
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   tasks            Task[]
+}
+
+model Vehicle {
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  brand              String
+  model              String
+  year               Int
+  fuelType           String
+  licensePlate       String
+  mileage            Int
+  status             String
+  maintenances       Maintenance[]
+  trips              Trip[]
+  documents          Document[]
+  tires              Tire[]
+  fuelConsumptions   FuelConsumption[]
+}
+
+model Trip {
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  vehicleId          String @db.ObjectId
+  startDate          DateTime
+  userId             String @db.ObjectId
+  endDate            DateTime
+  route              String
+  distanceTraveled   Float
+  travelTime         Float
+  vehicle            Vehicle    @relation(fields: [vehicleId], references: [id])
+  user            User    @relation(fields: [userId], references: [id])
+  optimizedRoute     OptimizedRoute[]
+}
+
+model Maintenance {
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  vehicleId          String @db.ObjectId
+  type               String
+  date               DateTime
+  description        String
+  cost               Float
+  status             String
+  vehicle            Vehicle    @relation(fields: [vehicleId], references: [id])
+}
+
+
+
+model Document {
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  vehicleId          String @db.ObjectId
+  type               String
+  documentName       String
+  expirationDate     DateTime
+  vehicle            Vehicle    @relation(fields: [vehicleId], references: [id])
+}
+
+model Tire {
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  vehicleId          String @db.ObjectId
+  brand              String
+  model              String
+  installationDate   DateTime
+  mileage            Int
+  wear               Float
+  vehicle            Vehicle    @relation(fields: [vehicleId], references: [id])
+}
+
+model FuelConsumption {
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  vehicleId          String @db.ObjectId
+  date               DateTime
+  quantity           Float
+  cost               Float
+  efficiency         Float
+  vehicle            Vehicle    @relation(fields: [vehicleId], references: [id])
+}
+
+model OptimizedRoute {
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  tripId             String @db.ObjectId
+  pointsOfInterest   String
+  totalDistance      Float
+  estimatedDuration  Float
+  trip               Trip       @relation(fields: [tripId], references: [id])
 }
