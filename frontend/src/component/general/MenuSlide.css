@@ -1,18 +1,23 @@
+/* MenuSlide.css */
 .admin-layout {
-    display: flex;
-  }
-  
-  .admin-layout-left {
-    width: 250px; /* Ancho del menú */
-    flex: 0 0 auto; /* El menú no crece ni encoge */
-    background-color: #f0f0f0; /* Color de fondo opcional */
-  }
-  
-  .admin-layout-right {
-    flex: 1; /* El área de contenido ocupa el espacio restante */
-  }
-  
-  .admin-layout-content {
-    padding: 20px; /* Espacio interior para el contenido */
-  }
-  
+  display: flex;
+  height: 100vh; /* Para que ocupe toda la altura de la pantalla */
+}
+
+.admin-layout-left {
+  width: 256px; /* Ancho del menú */
+  flex: 0 0 256px; /* El menú no crece ni encoge, mantiene su ancho fijo */
+  background-color: #f0f0f0; /* Color de fondo opcional */
+}
+
+.admin-layout-right {
+  flex: 1; /* El área de contenido ocupa el espacio restante */
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-layout-content {
+  padding: 10px; /* Espacio interior para el contenido */
+  flex: 1;
+  overflow: auto; /* Para manejar el desbordamiento de contenido */
+}
