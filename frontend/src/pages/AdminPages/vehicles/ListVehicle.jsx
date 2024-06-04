@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Vehicle } from "../../../api/vehicle"; // Asegúrate de ajustar la importación a la ruta correcta
-import { getVehicles, editVehicleById, deleteVehicleById } from "../../../slices/vehicleSlice"; // Ajusta las acciones de Redux a la ruta correcta
+import { Vehicle } from "../../../api/vehicle";
+import { getVehicles, editVehicleById, deleteVehicleById } from "../../../slices/vehicleSlice";
 import {
   Table,
   Space,
@@ -10,7 +10,6 @@ import {
   Form,
   Input,
   Switch,
-  Button,
 } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
@@ -24,6 +23,7 @@ export const ListVehicles = () => {
   const [selectedVehicle, setSelectedVehicle] = useState(null);
 
   useEffect(() => {
+    const vehicleApi = new Vehicle();
     const fetchVehicles = async () => {
       try {
         const vehiclesData = await vehicleApi.getVehicles();
@@ -43,6 +43,7 @@ export const ListVehicles = () => {
   };
 
   const handleDelete = (id) => {
+    const vehicleApi = new Vehicle();
     confirm({
       title: "Seguro quieres eliminar este vehículo?",
       content: "Esta opción no se puede revertir",
@@ -107,7 +108,7 @@ export const ListVehicles = () => {
     },
     {
       title: "Placa",
-      dataIndex: "plate",
+      dataIndex: "licensePlate",
       key: "plate",
     },
     {
@@ -168,7 +169,7 @@ export const ListVehicles = () => {
             <Form.Item label="Placa">
               <Input
                 name="plate"
-                value={selectedVehicle.plate}
+                value={selectedVehicle.licensePlate}
                 onChange={handleChange}
               />
             </Form.Item>
