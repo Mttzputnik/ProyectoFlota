@@ -1,7 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-// Obtener todos los usuarios
+// Obtener todos los user
 const listUsers = async (req, res) => {
   try {
     const users = await prisma.user.findMany();
@@ -14,7 +14,7 @@ const listUsers = async (req, res) => {
   }
 };
 
-// Crear un nuevo usuario
+// Crear un nuevo user
 const createUser = async (req, res) => {
   const { email, user_name, last_name, active_user, current_password, role } =
     req.body;
@@ -40,7 +40,7 @@ const createUser = async (req, res) => {
   }
 };
 
-// Obtener un usuario por id
+// Obtener un user por id
 const getUser = async (req, res) => {
   const { id } = req.params;
   try {
@@ -57,7 +57,7 @@ const getUser = async (req, res) => {
   }
 };
 
-// Actualizar un usuario por id
+// Actualizar un user por id
 const editUser = async (req, res) => {
   const { id } = req.params;
   const { email, user_name, last_name, active_user, current_password, role } =
@@ -95,7 +95,7 @@ const editUser = async (req, res) => {
   }
 };
 
-// Eliminar un usuario por id
+// Eliminar un user por id
 const deleteUser = async (req, res) => {
   const { id } = req.params;
   try {

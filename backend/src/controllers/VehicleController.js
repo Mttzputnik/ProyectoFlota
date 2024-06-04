@@ -16,15 +16,21 @@ const listVehicle = async (req, res) => {
 
 // Crear un nuevo vehicle
 const createVehicle = async (req, res) => {
-  const { brand, model, year, fuelType, licensePlate, mileage, status  } = req.body;
-
+  const { brand, model, year, fuelType, licensePlate, mileage, status } =
+    req.body;
+  const image = req.file ? req.file.filename : "default-vehicle.png"; // Si no se proporciona una imagen, usa 'default-vehicle.jpg'
+  console.log(`Archivo de imagen: ${image}`);
   
-
-
   try {
     const newVehicle = await prisma.vehicle.create({
       data: {
-        brand, model, year, fuelType, licensePlate, mileage, status 
+        brand,
+        model,
+        year,
+        fuelType,
+        licensePlate,
+        mileage,
+        status,
       },
     });
     res.status(200).json(newVehicle);
@@ -54,11 +60,18 @@ const getVehicle = async (req, res) => {
 // Actualizar un vehicle por id
 const editVehicle = async (req, res) => {
   const { id } = req.params;
-  const { brand, model, year, fuelType, licensePlate, mileage, status } = req.body;
+  const { brand, model, year, fuelType, licensePlate, mileage, status } =
+    req.body;
 
   try {
     const updateData = {
-        brand, model, year, fuelType, licensePlate, mileage, status 
+      brand,
+      model,
+      year,
+      fuelType,
+      licensePlate,
+      mileage,
+      status,
     };
 
     const vehicle = await prisma.vehicle.update({

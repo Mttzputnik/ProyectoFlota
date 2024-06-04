@@ -4,14 +4,19 @@ import { Vehicle } from "../../../api/vehicle";
 import { getVehicles, editVehicleById, deleteVehicleById } from "../../../slices/vehicleSlice";
 import {
   Table,
+  Image,
   Space,
   Tooltip,
   Modal,
   Form,
   Input,
   Switch,
+  Upload,
+  Button,
 } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
+
 
 const { confirm } = Modal;
 
@@ -95,7 +100,23 @@ export const ListVehicles = () => {
     });
   };
 
+  const handleUploadChange = (info) => {
+    const file = info.file.originFileObj || info.file;
+    setSelectedVehicle({
+      ...selectedVehicle,
+      image: file,
+    });
+  };
+
+
   const columns = [
+    {
+      title: "imagen",
+      dataIndex: "image",
+      key: "image",
+      render: (text, record) => <Image src={record.image} />
+    },
+
     {
       title: "Modelo",
       dataIndex: "model",
@@ -178,6 +199,15 @@ export const ListVehicles = () => {
                 checked={selectedVehicle.active_vehicle}
                 onChange={handleSwitchChange}
               />
+            </Form.Item>
+            <Form.Item label="Image">
+              <Upload
+                accept="image/*"
+                beforeUpload={() => false}
+                onChange={handleUploadChange}
+                fileList={[]}>
+                <Button icon={<UploadOutlined />}>Seleccionar archivo</Button>
+              </Upload>
             </Form.Item>
           </Form>
         </Modal>

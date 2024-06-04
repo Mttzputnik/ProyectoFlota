@@ -30,6 +30,7 @@ app.use('/documents', documentRoutes);
 app.use('/tire', tireRoutes);
 app.use('/fuelConsumption', fuelConsumptionRoutes);
 app.use('/optimizedRoute', optimizedRouteRoutes);
+app.use('/uploads', express.static('uploads'));
 
 // Conexión a la base de datos
 const { PrismaClient } = require("@prisma/client");
