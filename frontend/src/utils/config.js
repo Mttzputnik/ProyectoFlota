@@ -8,5 +8,12 @@ export const PATHS = {
         EDIT_USER: '/users/edit',
         DELETE_USER: '/users/delete',
         LIST_USER: '/users/list',
-    }
+
+        VEHICLES: 'vehicles',
+        LIST_VEHICLE: '/vehicles',
+        NEW_VEHICLE: '/vehicles/new-vehicle',
+        EDIT_VEHICLE: '/vehicles/edit',
+        DELETE_VEHICLE: '/vehicles/delete',
+    } 
+
 }
