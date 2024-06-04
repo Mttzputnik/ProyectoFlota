@@ -5,6 +5,7 @@ const initialState = {
     brand: "",
     model: "",
     year: 0,
+    Image: "",
     fuelType: "",
     licensePlate: "",
     mileage: 0,
@@ -25,6 +26,7 @@ export const vehicleSlice = createSlice({
         brand,
         model,
         year,
+        image,
         fuelType,
         licensePlate,
         mileage,
@@ -40,6 +42,7 @@ export const vehicleSlice = createSlice({
       state.brand = brand;
       state.model = model;
       state.year = year;
+      state.image = image;
       state.fuelType = fuelType;
       state.licensePlate = licensePlate;
       state.mileage = mileage;
