@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Vehicle } from "../../../api/vehicle";
 import { getVehicles, editVehicleById, deleteVehicleById } from "../../../slices/vehicleSlice";
@@ -14,21 +14,18 @@ import {
   Upload,
   Button,
 } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { UploadOutlined } from "@ant-design/icons";
-
+import { EditOutlined, DeleteOutlined, UploadOutlined } from "@ant-design/icons";
 
 const { confirm } = Modal;
 
 export const ListVehicles = () => {
   const dispatch = useDispatch();
   const vehicles = useSelector((state) => state.vehicle.vehicles);
-  const vehicleApi = new Vehicle();
+  const vehicleApi = useMemo(() => new Vehicle(), []);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
 
   useEffect(() => {
-    const vehicleApi = new Vehicle();
     const fetchVehicles = async () => {
       try {
         const vehiclesData = await vehicleApi.getVehicles();
@@ -39,7 +36,7 @@ export const ListVehicles = () => {
     };
 
     fetchVehicles();
-  }, [dispatch]);
+  }, [vehicleApi , dispatch]); 
 
   const handleEdit = (id) => {
     const vehicle = vehicles.find((vehicle) => vehicle.id === id);
@@ -48,7 +45,6 @@ export const ListVehicles = () => {
   };
 
   const handleDelete = (id) => {
-    const vehicleApi = new Vehicle();
     confirm({
       title: "Seguro quieres eliminar este vehículo?",
       content: "Esta opción no se puede revertir",
@@ -96,7 +92,7 @@ export const ListVehicles = () => {
   const handleSwitchChange = (checked) => {
     setSelectedVehicle({
       ...selectedVehicle,
-      active_vehicle: checked,
+      status: checked,
     });
   };
 
@@ -108,15 +104,13 @@ export const ListVehicles = () => {
     });
   };
 
-
   const columns = [
     {
-      title: "imagen",
+      title: "Imagen",
       dataIndex: "image",
       key: "image",
       render: (text, record) => <Image src={record.image} />
     },
-
     {
       title: "Modelo",
       dataIndex: "model",
@@ -130,14 +124,14 @@ export const ListVehicles = () => {
     {
       title: "Placa",
       dataIndex: "licensePlate",
-      key: "plate",
+      key: "licensePlate",
     },
     {
       title: "Activo",
-      dataIndex: "active_vehicle",
-      key: "active_vehicle",
+      dataIndex: "status",
+      key: "status",
       render: (text, record) => (
-        <span>{record.active_vehicle ? "Sí" : "No"}</span>
+        <span>{record.status ? "Sí" : "No"}</span>
       ),
     },
     {
@@ -189,18 +183,18 @@ export const ListVehicles = () => {
             </Form.Item>
             <Form.Item label="Placa">
               <Input
-                name="plate"
+                name="licensePlate"
                 value={selectedVehicle.licensePlate}
                 onChange={handleChange}
               />
             </Form.Item>
             <Form.Item label="Activo">
               <Switch
-                checked={selectedVehicle.active_vehicle}
+                checked={selectedVehicle.status}
                 onChange={handleSwitchChange}
               />
             </Form.Item>
-            <Form.Item label="Image">
+            <Form.Item label="Imagen">
               <Upload
                 accept="image/*"
                 beforeUpload={() => false}
