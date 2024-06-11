@@ -9,6 +9,8 @@ const documentRoutes = require("./src/routes/document_routes");
 const tireRoutes = require("./src/routes/tire_routes");
 const fuelConsumptionRoutes = require("./src/routes/fuelConsumption_routes");
 const optimizedRouteRoutes = require("./src/routes/optimizedRoute_routes");
+const warrantyRoutes = require("./src/routes/warranty_routes");
+
 const cors = require('cors');
 require('dotenv').config();
 
@@ -30,6 +32,7 @@ app.use('/documents', documentRoutes);
 app.use('/tire', tireRoutes);
 app.use('/fuelConsumption', fuelConsumptionRoutes);
 app.use('/optimizedRoute', optimizedRouteRoutes);
+app.use('/warranty', warrantyRoutes);
 app.use('/uploads', express.static('uploads'));
 
 // Conexión a la base de datos
