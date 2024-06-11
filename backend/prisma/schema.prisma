@@ -52,7 +52,7 @@ model Vehicle {
   fuelType           String
   licensePlate       String
   mileage            Int
-  status             String
+  status             Boolean
   maintenances       Maintenance[]
   trips              Trip[]
   documents          Document[]

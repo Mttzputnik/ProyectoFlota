@@ -63,7 +63,7 @@ export class User {
 
   deleteUserById = async (userId) => {
     try {
-      const URL = `${this.BASE_PATH}/${this.USERS}/delete/${userId}`;
+      const URL = `${this.BASE_PATH}${this.USERS}/delete/${userId}`;
       const params = {
         method: "DELETE",
       };

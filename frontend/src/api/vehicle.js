@@ -8,7 +8,7 @@ export class Vehicle {
 
   createVehicle = async (formData) => {
     try {
-      const URL = `${this.BASE_PATH}/${this.NEW_VEHICLE}`;
+      const URL = `${this.BASE_PATH}${this.NEW_VEHICLE}`;
       const params = {
         method: "POST",
         body: formData,

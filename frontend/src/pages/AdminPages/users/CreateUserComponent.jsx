@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addUser } from '../../slices/userSlice'
-import { User } from "../../api/user";
+import { addUser } from '../../../slices/userSlice'
+import { User } from "../../../api/user";
 
 export const ListComponent = () => {
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { User } from "../../../api/user";
 import { getUsers, editUserById, deleteUsersById } from "../../../slices/userSlice";
@@ -22,7 +22,7 @@ const { confirm } = Modal;
 export const ListComponent = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.users);
-  const userApi = new User();
+  const userApi = useMemo(() => new User(), []);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -37,7 +37,7 @@ export const ListComponent = () => {
     };
 
     fetchUsers();
-  }, [dispatch]);
+  }, [userApi , dispatch]);
 
   const handleEdit = (id) => {
     const user = users.find((user) => user.id === id);

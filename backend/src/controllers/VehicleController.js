@@ -26,11 +26,11 @@ const createVehicle = async (req, res) => {
       data: {
         brand,
         model,
-        year,
+        year: parseInt(year, 10),
         fuelType,
         licensePlate,
-        mileage,
-        status,
+        mileage: parseInt(mileage, 10),
+        status : status ? true : false,
       },
     });
     res.status(200).json(newVehicle);
@@ -67,11 +67,11 @@ const editVehicle = async (req, res) => {
     const updateData = {
       brand,
       model,
-      year,
+      year : parseInt(year, 10),
       fuelType,
       licensePlate,
-      mileage,
-      status,
+      mileage : parseInt(mileage, 10),
+      status : status ? true : false,
     };
 
     const vehicle = await prisma.vehicle.update({
