@@ -10,6 +10,7 @@ const tireRoutes = require("./src/routes/tire_routes");
 const fuelConsumptionRoutes = require("./src/routes/fuelConsumption_routes");
 const optimizedRouteRoutes = require("./src/routes/optimizedRoute_routes");
 const warrantyRoutes = require("./src/routes/warranty_routes");
+const authRoutes = require('./src/routes/auth_routes');
 
 const cors = require('cors');
 require('dotenv').config();
@@ -34,6 +35,7 @@ app.use('/fuelConsumption', fuelConsumptionRoutes);
 app.use('/optimizedRoute', optimizedRouteRoutes);
 app.use('/warranty', warrantyRoutes);
 app.use('/uploads', express.static('uploads'));
+app.use('/auth', authRoutes);
 
 // Conexión a la base de datos
 const { PrismaClient } = require("@prisma/client");
