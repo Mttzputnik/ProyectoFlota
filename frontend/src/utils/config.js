@@ -14,6 +14,13 @@ export const PATHS = {
         NEW_VEHICLE: '/vehicles/new-vehicle',
         EDIT_VEHICLE: '/vehicles/edit',
         DELETE_VEHICLE: '/vehicles/delete',
+
+        TRIPS: '/trips',
+        LIST_TRIP: '/trips',
+        NEW_TRIP: '/trips/new-trip',
+        EDIT_TRIP: '/trips/edit',
+        DELETE_TRIP: '/trips/delete',
+        
     } 
 
 }
