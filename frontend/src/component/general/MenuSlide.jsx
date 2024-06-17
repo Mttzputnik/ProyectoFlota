@@ -1,7 +1,7 @@
 // MenuSlide.jsx
 import React, { useState } from 'react';
 import { Menu } from 'antd';
-import { CarOutlined, UserOutlined, OrderedListOutlined } from '@ant-design/icons';
+import { CarOutlined, UserOutlined, OrderedListOutlined, LaptopOutlined, GooglePlusOutlined, CameraOutlined, ScanOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import './MenuSlide.css';
 
@@ -21,6 +21,9 @@ export const MenuSlide = () => {
     else if (key === 'addVehicles') {
       navigate('/admin/addVehicles');
     }
+    else if (key === 'ListTrips') {
+      navigate('/admin/ListTrips');
+    }
   };
 
   const items = [
@@ -31,7 +34,7 @@ export const MenuSlide = () => {
       children: [
         {
           key: "users",
-          label: "Users",
+          label: "Lista de usuarios",
         },
       ],
     },
@@ -40,17 +43,14 @@ export const MenuSlide = () => {
       label: "Vehículos",
       icon: <CarOutlined />,
       children: [
-        {
-          key: "taskvehiculo",
-          label: "Tareas de vehículos",
-        },
+       
         {
           key: "listVehicles",
-          label: "lista de vehículos",
+          label: "Lista de vehículos",
         },
         {
           key: "addVehicles",
-          label: "agregar vehículos",
+          label: "Agregar vehículos",
         },
       ],
     },
@@ -63,11 +63,24 @@ export const MenuSlide = () => {
       icon: <OrderedListOutlined />,
       children: [
         {
-          key: "9",
-          label: "Option 9",
-        }
+          key: "taskvehiculo",
+          label: "Tareas de vehículos",
+        },
       ],
     },
+    {
+      key: "sub5",
+      label: "monitoreo",
+      icon: <ScanOutlined/>,
+      children: [
+        {
+          key: "ListTrips",
+          label: "Viajes",
+        }
+
+      ],
+
+      },
     {
       key: "grp",
       label: "Group",

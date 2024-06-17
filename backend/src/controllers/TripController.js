@@ -16,14 +16,26 @@ const listTrip = async (req, res) => {
 
 // Crear un nuevo trip
 const createTrip = async (req, res) => {
-  const { vehicleId, startDate, userId, endDate, route, distanceTraveled, travelTime } = req.body;
-
-  vehicleId, startDate, userId, endDate, route, distanceTraveled, travelTime         
+  const {
+    vehicleId,
+    startDate,
+    userId,
+    endDate,
+    route,
+    distanceTraveled,
+    travelTime,
+  } = req.body;
 
   try {
     const newTrip = await prisma.trip.create({
       data: {
-        vehicleId, startDate, userId, endDate, route, distanceTraveled, travelTime
+        vehicleId,
+        startDate,
+        userId,
+        endDate,
+        route,
+        distanceTraveled,
+        travelTime,
       },
     });
     res.status(200).json(newTrip);
@@ -53,11 +65,25 @@ const getTrip = async (req, res) => {
 // Actualizar un trip por id
 const editTrip = async (req, res) => {
   const { id } = req.params;
-  const { vehicleId, startDate, userId, endDate, route, distanceTraveled, travelTime } = req.body;
+  const {
+    vehicleId,
+    startDate,
+    userId,
+    endDate,
+    route,
+    distanceTraveled,
+    travelTime,
+  } = req.body;
 
   try {
     const updateData = {
-      vehicleId, startDate, userId, endDate, route, distanceTraveled, travelTime
+      vehicleId,
+      startDate,
+      userId,
+      endDate,
+      route,
+      distanceTraveled,
+      travelTime,
     };
 
     const trip = await prisma.trip.update({

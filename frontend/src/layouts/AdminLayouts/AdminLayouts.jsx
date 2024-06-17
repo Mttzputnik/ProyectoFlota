@@ -7,7 +7,7 @@ export const AdminLayouts = ({ children }) => {
   return (
     <div className='admin-layout'>
       <div className='admin-layout-left'>
-        <span className="menu-slide-title">Titulo Empresa<SmileOutlined />  </span>
+        <span className="menu-slide-title">Titulo Empresa <SmileOutlined />  </span>
         <MenuSlide />
       </div>
       <div className='admin-layout-right'>

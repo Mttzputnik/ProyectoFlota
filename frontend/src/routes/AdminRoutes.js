@@ -5,8 +5,10 @@ import { ListComponent } from "../pages/AdminPages/users/ListComponent";
 import { AdminLayouts } from "../layouts/AdminLayouts/AdminLayouts";
 import { ListVehicles } from "../pages/AdminPages/vehicles/ListVehicle";
 import { AddVehicle } from "../pages/AdminPages/vehicles/AddVehicle";
+import { ListTrips } from "../pages/AdminPages/trips/ListTrips";
 import LoginForm  from "../pages/AdminPages/login/LoginForm";
 import SignupForm  from "../pages/AdminPages/login/SignupForm";
+
 
 
 export const AdminRoutes = () => {
@@ -17,6 +19,7 @@ export const AdminRoutes = () => {
             <Route path="/admin/vehicles" element={<AdminLayouts><Vehicle /></AdminLayouts>} />
             <Route path="/admin/listVehicles" element={<AdminLayouts><ListVehicles /></AdminLayouts>} />
             <Route path="/admin/addVehicles" element={<AdminLayouts><AddVehicle /></AdminLayouts>} />
+            <Route path="/admin/ListTrips" element={<AdminLayouts><ListTrips /></AdminLayouts>} />
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/" element={<LoginForm />} />
         </Routes>
