@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+require('dotenv').config();
 const prisma = new PrismaClient();
 
 // Obtener todos los optimizedRoutes
@@ -87,10 +88,32 @@ const deleteOptimizedRoute = async (req, res) => {
   }
 };
 
+const calculateRoute = async (req, res) => {
+  const { start, stops } = req.body;
+
+  if (!start || !Array.isArray(stops) || stops.length === 0) {
+    return res.status(400).send('Invalid input');
+  }
+
+  const waypoints = stops.map(stop => `via:${stop.lat},${stop.lng}`).join('|');
+  const CONNECTION_GOOGLE_API = process.env.GOOGLE_API;
+  const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${start.lat},${start.lng}&destination=${start.lat},${start.lng}&waypoints=${waypoints}&optimizeWaypoints=true&key=CONNECTION_GOOGLE_API`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error calculating route');
+  }
+};
+
 module.exports = {
   createOptimizedRoute,
   deleteOptimizedRoute,
   editOptimizedRoute,
   getOptimizedRoute,
   listOptimizedRoute,
+  calculateRoute,
 };
