@@ -8,28 +8,31 @@ const listTask = async (req, res) => {
     res.status(200).json(tasks);
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ error: `Error al obtener todas las tasks ${error}` });
+    res.status(500).json({ error: `Error al obtener todas las tasks ${error.message}` });
   }
 };
 
 // Crear un nuevo task
 const createTask = async (req, res) => {
   const { idUser, idList, desc } = req.body;
+  console.log("Datos recibidos:", { idUser, idList, desc });
+
+  if (!idUser || !idList || !desc) {
+    return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+  }
 
   try {
     const newTask = await prisma.task.create({
       data: {
         idUser,
         idList,
-        desc
+        desc,
       },
     });
     res.status(200).json(newTask);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: `Error al crear el task ${error}` });
+    res.status(500).json({ error: `Error al crear el task ${error.message}` });
   }
 };
 
@@ -46,7 +49,7 @@ const getTask = async (req, res) => {
     res.status(200).json(task);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: `Error al obtener la Task ${error}` });
+    res.status(500).json({ error: `Error al obtener la Task ${error.message}` });
   }
 };
 
@@ -54,6 +57,11 @@ const getTask = async (req, res) => {
 const editTask = async (req, res) => {
   const { id } = req.params;
   const { idUser, idList, desc } = req.body;
+  console.log("Datos para actualizar:", { idUser, idList, desc });
+
+  if (!idUser || !idList || !desc) {
+    return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+  }
 
   try {
     const updateData = {
@@ -70,9 +78,7 @@ const editTask = async (req, res) => {
     res.status(200).json(task);
   } catch (error) {
     console.log(error);
-    res
-      .status(500)
-      .json({ error: `Error al actualizar la task : ${error.message}` });
+    res.status(500).json({ error: `Error al actualizar la task : ${error.message}` });
   }
 };
 
@@ -86,7 +92,7 @@ const deleteTask = async (req, res) => {
     res.status(200).json({ message: "task eliminado correctamente" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: `Error al eliminar el task ${error}` });
+    res.status(500).json({ error: `Error al eliminar el task ${error.message}` });
   }
 };
 
