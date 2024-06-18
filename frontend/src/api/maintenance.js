@@ -1,50 +1,54 @@
 import { PATHS } from "../utils/config";
 
-export class Task {
+export class Maintenance {
     BASE_PATH = PATHS.BASE_PATH;
-    TASKS = PATHS.API_ROUTES.TASKS;
-    NEW_TASK = PATHS.API_ROUTES.NEW_TASK;
-    EDIT_TASK = PATHS.API_ROUTES.EDIT_TASK;
+    MAINTENANCE = PATHS.API_ROUTES.MAINTENANCE;
+    NEW_MAINTENANCE = PATHS.API_ROUTES.NEW_MAINTENANCE;
+    EDIT_MAINTENANCE = PATHS.API_ROUTES.EDIT_MAINTENANCE;
 
-    createTask = async (formData) => {
+    createMaintenance = async (formData) => {
         try {
-            const URL = `${this.BASE_PATH}${this.NEW_TASK}`;
+            const URL = `${this.BASE_PATH}${this.NEW_MAINTENANCE}`;
             const params = {
                 method: "POST",
                 body: formData,
             };
             const response = await fetch(URL, params);
             return await response.json();
-        } catch (error) {
+        }
+        catch (error) {
             console.error(error);
             throw error;
         }
 
     }
 
-    getTasks = async () => {
+    getMaintenances = async () => {
         try {
-            const URL = `${this.BASE_PATH}${this.TASKS}`;
+            const URL = `${this.BASE_PATH}${this.MAINTENANCE}`;
             const response = await fetch(URL);
             return await response.json();
-        } catch (error) {
+        }
+        catch (error) {
             console.error(error);
         }
     }
 
-    getTaskById = async (taskId) => {
+    getMaintenanceById = async (maintenanceId) => {
         try {
-            const URL = `${this.BASE_PATH}${this.TASKS}/${taskId}`;
+
+            const URL = `${this.BASE_PATH}${this.MAINTENANCE}/${maintenanceId}`;
             const response = await fetch(URL);
             return await response.json();
-        } catch (error) {
+        }
+        catch (error) {
             console.error(error);
         }
     }
 
-    editTaskById = async (taskId, updatedData) => {
+    editMaintenanceById = async (maintenanceId, updatedData) => {
         try {
-            const URL = `${this.BASE_PATH}${this.EDIT_TASK}/${taskId}`;
+            const URL = `${this.BASE_PATH}${this.EDIT_MAINTENANCE}/${maintenanceId}`;
             console.log("URL", URL);
             const formData = new FormData();
             for (const key in updatedData) {
@@ -58,21 +62,25 @@ export class Task {
 
             const response = await fetch(URL, params);
             return await response.json();
-        } catch (error) {
+        }
+        catch (error) {
             console.error(error);
         }
     }
 
-    deleteTaskById = async (taskId) => {
+    deleteMaintenanceById = async (maintenanceId) => {
         try {
-            const URL = `${this.BASE_PATH}${this.TASKS}/${taskId}`;
+            const URL = `${this.BASE_PATH}${this.MAINTENANCE}/${maintenanceId}`;
             const params = {
                 method: "DELETE",
             };
             const response = await fetch(URL, params);
             return await response.json();
-        } catch (error) {
+        }
+
+        catch (error) {
             console.error(error);
         }
     }
-}   
+}
+

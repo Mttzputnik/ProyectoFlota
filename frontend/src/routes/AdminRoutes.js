@@ -10,7 +10,7 @@ import { ListTires } from "../pages/AdminPages/tires/ListTires";
 import LoginForm  from "../pages/AdminPages/login/LoginForm";
 import IndexForm  from "../pages/AdminPages/index/Index";
 import SignupForm  from "../pages/AdminPages/login/SignupForm";
-import { Vehicle } from "../api/vehicle";
+import { CreateDrivers } from "../component/drivers/CreateDrivers";
 
 
 
@@ -20,6 +20,7 @@ export const AdminRoutes = () => {
         <Routes>
             
             <Route path="/admin/users" element={<AdminLayouts><ListUsers /></AdminLayouts>} />
+            <Route path="/admin/CreateTasks" element={<AdminLayouts><CreateDrivers /></AdminLayouts>} />
             <Route path="/admin/ListTasks" element={<AdminLayouts><ListTasks /></AdminLayouts>} />
             <Route path="/admin/listVehicles" element={<AdminLayouts><ListVehicles /></AdminLayouts>} />
             <Route path="/admin/addVehicles" element={<AdminLayouts><AddVehicle /></AdminLayouts>} />
