@@ -102,7 +102,20 @@ const calculateRoute = async (req, res) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
+    
+    const newOptimizedRoute = await prisma.optimizedRoute.create({
+      data: {
+        tripId, pointsOfInterest, totalDistance, estimatedDuration
+      },
+    });
+    res.status(200).json(newOptimizedRoute);
+    
+    /*
+    await prisma.optimizedRoute.create({
+      where: { id: id },
+    });
     res.json(data);
+    */
   } catch (error) {
     console.error(error);
     res.status(500).send('Error calculating route');

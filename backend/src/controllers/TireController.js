@@ -22,7 +22,7 @@ const createTire = async (req, res) => {
   try {
     const newTire = await prisma.tire.create({
       data: {
-        vehicleId, brand, model, installationDate, mileage, wear
+        vehicleId, brand, model, installationDate, mileage : parseInt(mileage), wear: parseFloat(wear)
       },
     });
     res.status(200).json(newTire);
