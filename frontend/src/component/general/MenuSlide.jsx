@@ -10,8 +10,8 @@ export const MenuSlide = () => {
   const onClick = ({ key }) => {
     console.log("key", key);
 
-    if (key === 'listUsers') {
-      navigate('/admin/ListUsers');
+    if (key === 'listusers') {
+      navigate('/admin/users');
 
     } else if (key === 'listTasks') {
       navigate('/admin/ListTasks');
