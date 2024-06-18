@@ -21,8 +21,8 @@ model User {
   avatar           String?
   active_user      Boolean
   current_password String
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  createdAt        String
+  updatedAt        String 
   role             String
   tasks            Task[]
   trips              Trip[]
@@ -65,9 +65,9 @@ model Vehicle {
 model Trip {
   id                 String @id @default(auto()) @map("_id") @db.ObjectId
   vehicleId          String @db.ObjectId
-  startDate          DateTime
+  startDate          String
   userId             String @db.ObjectId
-  endDate            DateTime
+  endDate            String
   route              String
   distanceTraveled   Float
   travelTime         Float
@@ -80,7 +80,7 @@ model Maintenance {
   id                 String @id @default(auto()) @map("_id") @db.ObjectId
   vehicleId          String @db.ObjectId
   type               String
-  date               DateTime
+  date               String
   description        String
   cost               Float
   status             String
@@ -94,7 +94,7 @@ model Document {
   vehicleId          String @db.ObjectId
   type               String
   documentName       String
-  expirationDate     DateTime
+  expirationDate     String
   vehicle            Vehicle    @relation(fields: [vehicleId], references: [id])
 }
 
@@ -103,7 +103,7 @@ model Tire {
   vehicleId          String @db.ObjectId
   brand              String
   model              String
-  installationDate   DateTime
+  installationDate   String
   mileage            Int
   wear               Float
   vehicle            Vehicle    @relation(fields: [vehicleId], references: [id])
@@ -112,7 +112,7 @@ model Tire {
 model FuelConsumption {
   id                 String @id @default(auto()) @map("_id") @db.ObjectId
   vehicleId          String @db.ObjectId
-  date               DateTime
+  date               String
   quantity           Float
   cost               Float
   efficiency         Float
