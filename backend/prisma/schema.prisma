@@ -26,6 +26,7 @@ model User {
   role             String
   tasks            Task[]
   trips              Trip[]
+  userResponsability UserResponsability[]
 }
 
 model Task {
@@ -34,6 +35,8 @@ model Task {
   user    User   @relation(fields: [idUser], references: [id])
   idList String @db.ObjectId
   list List  @relation(fields: [idList], references: [id])
+  idTrip String @db.ObjectId
+  Trip Trip @relation(fields: [idTrip], references: [id])
   desc String
 }
 
@@ -59,7 +62,7 @@ model Vehicle {
   tires              Tire[]
   fuelConsumptions   FuelConsumption[]
   Warranty   Warranty[]
-
+  userResponsability UserResponsability[]
 }
 
 model Trip {
@@ -68,12 +71,20 @@ model Trip {
   startDate          String
   userId             String @db.ObjectId
   endDate            String
-  route              String
   distanceTraveled   Float
   travelTime         Float
   vehicle            Vehicle    @relation(fields: [vehicleId], references: [id])
   user            User    @relation(fields: [userId], references: [id])
   optimizedRoute     OptimizedRoute[]
+  tasks            Task[]
+}
+model UserResponsability {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  vehicleId          String @db.ObjectId
+  userId             String @db.ObjectId
+  estado Boolean
+  vehicle            Vehicle    @relation(fields: [vehicleId], references: [id])
+  user            User    @relation(fields: [userId], references: [id])
 }
 
 model Maintenance {
