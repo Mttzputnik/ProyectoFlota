@@ -1,4 +1,3 @@
-// MenuSlide.jsx
 import React, { useState } from 'react';
 import { Menu } from 'antd';
 import { CarOutlined, UserOutlined, OrderedListOutlined, HarmonyOSOutlined , ScanOutlined , AlertOutlined} from '@ant-design/icons';
@@ -10,25 +9,27 @@ export const MenuSlide = () => {
 
   const onClick = ({ key }) => {
     console.log("key", key);
-    if (key === 'users') {
-      navigate('/admin/users');
-    } else if (key === 'taskvehiculo') {
-      navigate('/admin/vehicles');
+
+    if (key === 'listUsers') {
+      navigate('/admin/ListUsers');
+
+    } else if (key === 'listTasks') {
+      navigate('/admin/ListTasks');
     }
     else if (key === 'listVehicles') {
-      navigate('/admin/listVehicles');
+      navigate('/admin/ListVehicles');
     }
     else if (key === 'addVehicles') {
-      navigate('/admin/addVehicles');
+      navigate('/admin/AddVehicles');
     }
-    else if (key === 'ListTrips') {
+    else if (key === 'listTrips') {
       navigate('/admin/ListTrips');
     }
     else if (key === 'listTires') {
       navigate('/admin/ListTires');
     }
-    else if (key === 'listMantenimiento') {
-      navigate('/admin/ListMantenimiento');
+    else if (key === 'listMaintenance') {
+      navigate('/admin/ListMaintenance');
     }
   };
 
@@ -38,8 +39,9 @@ export const MenuSlide = () => {
       label: "Usuarios",
       icon: <UserOutlined />,
       children: [
+
         {
-          key: "users",
+          key: "listusers",
           label: "Lista de usuarios",
         },
       ],
@@ -78,7 +80,7 @@ export const MenuSlide = () => {
       icon: <AlertOutlined />,
       children: [
         {
-          key: "listMantenimiento",
+          key: "listMaintenance",
           label: "Lista de mantenimientos",
         },
       ],
@@ -89,7 +91,7 @@ export const MenuSlide = () => {
       icon: <OrderedListOutlined />,
       children: [
         {
-          key: "taskvehiculo",
+          key: "listTasks",
           label: "Tareas de vehículos",
         },
       ],
@@ -100,7 +102,7 @@ export const MenuSlide = () => {
       icon: <ScanOutlined/>,
       children: [
         {
-          key: "ListTrips",
+          key: "listTrips",
           label: "Viajes",
         }
       ],

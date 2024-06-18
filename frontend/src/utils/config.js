@@ -20,6 +20,12 @@ export const PATHS = {
         NEW_TRIP: '/trips/new-trip',
         EDIT_TRIP: '/trips/edit',
         DELETE_TRIP: '/trips/delete',
+
+        TASKS: '/tasks',
+        LIST_TASK: '/tasks',
+        NEW_TASK: '/tasks/new-task',
+        EDIT_TASK: '/tasks/edit',
+        DELETE_TASK: '/tasks/delete',
         
         NEW_OPTIMIZED_ROUTE: 'optimizedRoute/new-optimizedRoute',
         CALCULATE_OPTIMIZED_ROUTE: '/optimizedRoute/calculate',
