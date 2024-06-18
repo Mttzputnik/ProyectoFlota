@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTasks, editTaskById } from '../../slices/taskSlice';
 import { getUsers } from '../../slices/userSlice';
 import { getLists } from '../../slices/listSlice';
-import { Select, Button } from 'antd';
+import { Select, Button, Modal, Form, Input } from 'antd'; // Asegúrate de importar Input aquí
 import { Task } from '../../api/task';
 import { User } from '../../api/user';
 import { List } from '../../api/list';
@@ -16,11 +16,12 @@ export const DragAndDrop = () => {
   const tasks = useSelector(state => state.task.tasks) || [];
   const users = useSelector(state => state.user.users) || [];
   const lists = useSelector(state => state.list.lists) || [];
-  const taskApi = new Task();
-  const userApi = new User();
-  const listApi = new List();
+  const taskApi = new Task(); 
+  const userApi = new User(); 
+  const listApi = new List(); 
 
-  const [editingTaskId, setEditingTaskId] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [editingTask, setEditingTask] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,7 +60,7 @@ export const DragAndDrop = () => {
     const itemID = evt.dataTransfer.getData('itemID');
     const item = tasks.find(task => task.id === itemID);
     if (item) {
-      const updatedItem = { ...item, idList: listId }; // Crear una copia y actualizar idList
+      const updatedItem = { ...item, idList: listId };
 
       try {
         await taskApi.editTaskById(item.id, updatedItem);
@@ -73,7 +74,7 @@ export const DragAndDrop = () => {
   const assignUser = async (taskId, userId) => {
     const task = tasks.find(task => task.id === taskId);
     if (task) {
-      const updatedTask = { ...task, idUser: userId }; // Crear una copia y actualizar idUser
+      const updatedTask = { ...task, idUser: userId };
       try {
         await taskApi.editTaskById(task.id, updatedTask);
         dispatch(editTaskById(updatedTask));
@@ -83,12 +84,30 @@ export const DragAndDrop = () => {
     }
   }
 
-  const toggleEdit = (taskId) => {
-    setEditingTaskId(editingTaskId === taskId ? null : taskId);
+  const handleEdit = (task) => {
+    setEditingTask(task);
+    setIsModalVisible(true);
+  }
+
+  const handleOk = async (values) => {
+    const updatedTask = { ...editingTask, ...values };
+    try {
+      await taskApi.editTaskById(editingTask.id, updatedTask);
+      dispatch(editTaskById(updatedTask));
+      setIsModalVisible(false);
+      setEditingTask(null);
+    } catch (error) {
+      console.error("Error al actualizar la tarea", error);
+    }
+  }
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    setEditingTask(null);
   }
 
   // Verificar si los datos están cargando
-  if (!tasks || !users || !lists) {
+  if (!Array.isArray(tasks) || !Array.isArray(users) || !Array.isArray(lists)) {
     return <div>Cargando...</div>;
   }
 
@@ -105,31 +124,63 @@ export const DragAndDrop = () => {
               {getList(list.id).map(item => (
                 <div className='dd-element' key={item.id} draggable onDragStart={(evt) => startDrag(evt, item)}>
                   <strong className='title'>{item.desc}</strong>
-                  {editingTaskId === item.id ? (
-                    <Select
-                      placeholder="Asignar Usuario"
-                      onChange={(value) => assignUser(item.id, value)}
-                      style={{ width: '100%' }}
-                      value={item.idUser}
-                    >
-                      {users.map(user => (
-                        <Option key={user.id} value={user.id}>
-                          {user.email}
-                        </Option>
-                      ))}
-                    </Select>
-                  ) : (
-                    <div>
-                      <p>Usuario asignado: {users.find(user => user.id === item.idUser)?.email || "Ninguno"}</p>
-                      <Button onClick={() => toggleEdit(item.id)}>Editar</Button>
-                    </div>
-                  )}
+                  <Select
+                    placeholder="Asignar Usuario"
+                    onChange={(value) => assignUser(item.id, value)}
+                    style={{ width: '100%' }}
+                    value={item.idUser}
+                  >
+                    {users.map(user => (
+                      <Option key={user.id} value={user.id}>
+                        {user.email}
+                      </Option>
+                    ))}
+                  </Select>
+                  <Button onClick={() => handleEdit(item)}>Editar</Button>
                 </div>
               ))}
             </div>
           </div>
         ))}
       </div>
+
+      <Modal
+        title="Editar Tarea"
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <Form
+          initialValues={editingTask}
+          onFinish={handleOk}
+        >
+          <Form.Item
+            name="desc"
+            label="Descripción"
+            rules={[{ required: true, message: 'Por favor ingrese la descripción' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="idUser"
+            label="Usuario"
+            rules={[{ required: true, message: 'Por favor seleccione un usuario' }]}
+          >
+            <Select placeholder="Seleccionar usuario">
+              {users.map(user => (
+                <Option key={user.id} value={user.id}>
+                  {user.email}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Guardar
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
     </>
   );
 }

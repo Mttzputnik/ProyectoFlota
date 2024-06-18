@@ -8,19 +8,21 @@ export class Task {
 
     createTask = async (formData) => {
         try {
-            const URL = `${this.BASE_PATH}${this.NEW_TASK}`;
-            const params = {
-                method: "POST",
-                body: formData,
-            };
-            const response = await fetch(URL, params);
-            return await response.json();
+          const URL = `${this.BASE_PATH}${this.NEW_TASK}`;
+          const params = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData),
+          };
+          const response = await fetch(URL, params);
+          return await response.json();
         } catch (error) {
-            console.error(error);
-            throw error;
+          console.error(error);
+          throw error;
         }
-
-    }
+      }
 
     getTasks = async () => {
         try {
