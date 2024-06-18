@@ -11,6 +11,7 @@ const fuelConsumptionRoutes = require("./src/routes/fuelConsumption_routes");
 const optimizedRouteRoutes = require("./src/routes/optimizedRoute_routes");
 const warrantyRoutes = require("./src/routes/warranty_routes");
 const authRoutes = require('./src/routes/auth_routes');
+const userResponsability = require('./src/routes/UserResponsability_routes');
 
 const cors = require('cors');
 require('dotenv').config();
@@ -34,6 +35,7 @@ app.use('/tire', tireRoutes);
 app.use('/fuelConsumption', fuelConsumptionRoutes);
 app.use('/optimizedRoute', optimizedRouteRoutes);
 app.use('/warranty', warrantyRoutes);
+app.use('/userResponsability', userResponsability);
 app.use('/uploads', express.static('uploads'));
 app.use('/auth', authRoutes);
 
