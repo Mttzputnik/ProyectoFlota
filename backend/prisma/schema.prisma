@@ -35,8 +35,8 @@ model Task {
   user    User   @relation(fields: [idUser], references: [id])
   idList String @db.ObjectId
   list List  @relation(fields: [idList], references: [id])
-  idTrip String @db.ObjectId
-  Trip Trip @relation(fields: [idTrip], references: [id])
+  idTrip String? @db.ObjectId
+  Trip Trip? @relation(fields: [idTrip], references: [id])
   desc String
 }
 
