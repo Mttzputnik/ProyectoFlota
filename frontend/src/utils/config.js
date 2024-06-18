@@ -40,6 +40,13 @@ export const PATHS = {
         DELETE_TIRE: '/tire/delete',
         LIST_TIRE: '/tire',
         GET_TIRE: '/tire/:id',
+
+        WARRANTY: '/warranty',
+        NEW_WARRANTY: '/warranty/new-warranty',
+        EDIT_WARRANTY: '/warranty/edit',
+        DELETE_WARRANTY: '/warranty/delete',
+        LIST_WARRANTY: '/warranty',
+        GET_WARRANTY: '/warranty/:id',
     } 
 
 }
