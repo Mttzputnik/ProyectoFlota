@@ -25,7 +25,7 @@ const SignupForm = () => {
     try {
       const response = await axios.post('http://localhost:3001/auth/signup', formData);
       console.log('User registered:', response.data);
-      navigate('/login');  // Redirigir a la página de login
+      navigate('/');  // Redirigir a la página de login
     } catch (error) {
       console.error('Error registering:', error.response ? error.response.data : error);
     }
