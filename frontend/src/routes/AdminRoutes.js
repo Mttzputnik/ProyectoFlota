@@ -7,6 +7,7 @@ import { ListVehicles } from "../pages/AdminPages/vehicles/ListVehicle";
 import { AddVehicle } from "../pages/AdminPages/vehicles/AddVehicle";
 import { ListTrips } from "../pages/AdminPages/trips/ListTrips";
 import LoginForm  from "../pages/AdminPages/login/LoginForm";
+import IndexForm  from "../pages/AdminPages/index/Index";
 import SignupForm  from "../pages/AdminPages/login/SignupForm";
 
 
@@ -21,7 +22,8 @@ export const AdminRoutes = () => {
             <Route path="/admin/addVehicles" element={<AdminLayouts><AddVehicle /></AdminLayouts>} />
             <Route path="/admin/ListTrips" element={<AdminLayouts><ListTrips /></AdminLayouts>} />
             <Route path="/signup" element={<SignupForm />} />
-            <Route path="/" element={<LoginForm />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/"aaaaaaa element={<IndexForm />} />
         </Routes>
     )
 }
