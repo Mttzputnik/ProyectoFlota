@@ -1,0 +1,133 @@
+/* src/index.css o src/App.css */
+
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+  }
+  
+  #root {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0 20px;
+    background-color: #001529;
+  }
+  
+  .logo {
+    color: white;
+    font-size: 1.5rem;
+  }
+  
+  .menu {
+    flex: 1;
+  }
+  
+  .login-button {
+    margin-left: auto;
+  }
+  
+  .hero {
+    padding: 100px 0;
+    background: #f0f2f5;
+    margin-top: 64px; /* Ajusta según la altura del header */
+  }
+  
+  .site-layout-content {
+    background: #fff;
+    padding: 24px;
+    flex: 1;
+  }
+  
+  .footer {
+    background: #f0f2f5;
+    color: black;
+    text-align: center;
+    padding: 24px 50px;
+  }
+  
+  .ant-card {
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .carousel {
+    margin: 20px 0;
+  }
+  
+  .carousel h3 {
+    color: #fff;
+    line-height: 160px;
+    text-align: center;
+    background: #364d79;
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card .ant-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  @media (max-width: 768px) {
+    .hero {
+      padding: 50px 0;
+    }
+  
+    .site-layout-content {
+      padding: 12px;
+    }
+  
+    .footer {
+      padding: 12px 25px;
+    }
+  
+    .ant-card {
+      margin-bottom: 16px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .menu {
+      width: 100%;
+    }
+  
+    .login-button {
+      margin: 10px 0 0 0;
+    }
+  }
+  
