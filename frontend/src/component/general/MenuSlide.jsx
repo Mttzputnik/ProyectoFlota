@@ -1,7 +1,7 @@
 // MenuSlide.jsx
 import React, { useState } from 'react';
 import { Menu } from 'antd';
-import { CarOutlined, UserOutlined, OrderedListOutlined, LaptopOutlined, GooglePlusOutlined, CameraOutlined, ScanOutlined } from '@ant-design/icons';
+import { CarOutlined, UserOutlined, OrderedListOutlined, HarmonyOSOutlined , ScanOutlined , AlertOutlined} from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import './MenuSlide.css';
 
@@ -23,6 +23,12 @@ export const MenuSlide = () => {
     }
     else if (key === 'ListTrips') {
       navigate('/admin/ListTrips');
+    }
+    else if (key === 'listTires') {
+      navigate('/admin/ListTires');
+    }
+    else if (key === 'listMantenimiento') {
+      navigate('/admin/ListMantenimiento');
     }
   };
 
@@ -55,10 +61,30 @@ export const MenuSlide = () => {
       ],
     },
     {
-      type: "divider",
+      key: "sub3",
+      label: "Llantas",
+      icon: <HarmonyOSOutlined />,
+      children: [
+       
+        {
+          key: "listTires",
+          label: "Lista de llantas",
+        },
+      ],
     },
     {
       key: "sub4",
+      label: "Mantenimiento",
+      icon: <AlertOutlined />,
+      children: [
+        {
+          key: "listMantenimiento",
+          label: "Lista de mantenimientos",
+        },
+      ],
+    },
+    {
+      key: "sub5",
       label: "Tareas",
       icon: <OrderedListOutlined />,
       children: [
@@ -69,7 +95,7 @@ export const MenuSlide = () => {
       ],
     },
     {
-      key: "sub5",
+      key: "sub6",
       label: "monitoreo",
       icon: <ScanOutlined/>,
       children: [
@@ -77,9 +103,10 @@ export const MenuSlide = () => {
           key: "ListTrips",
           label: "Viajes",
         }
-
       ],
-
+      },
+      {
+        type: "divider",
       },
     {
       key: "grp",

@@ -7,7 +7,8 @@ import { addTrip, getTrips } from '../../../slices/tripslice';
 import { getVehicles } from '../../../slices/vehicleSlice';
 import { getUsers } from '../../../slices/userSlice';
 import { Button, Form, Input, Select, Table, DatePicker } from 'antd';
-import moment from 'moment'; // Importa moment para manejar las fechas
+import moment from 'moment';
+import GoogleMapComponent from './GoogleMapComponent';  // Importar el componente del mapa
 
 const { Option } = Select;
 
@@ -21,6 +22,8 @@ export const ListTrips = () => {
   const tripApi = useMemo(() => new Trip(), []);
   const vehicleApi = useMemo(() => new Vehicle(), []);
   const userApi = useMemo(() => new User(), []);
+
+  const [optimizedRoute, setOptimizedRoute] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +53,7 @@ export const ListTrips = () => {
         ...values,
         startDate: moment(values.startDate).toDate(),
         endDate: moment(values.endDate).toDate(),
+        route: optimizedRoute, // Agregar la ruta optimizada
       };
 
       const trip = await tripApi.createTrip(dataToSend);
@@ -72,6 +76,10 @@ export const ListTrips = () => {
     { title: 'Fecha de Fin', dataIndex: 'endDate', key: 'endDate', render: (text) => new Date(text).toLocaleString() },
     { title: 'Creado en', dataIndex: 'createdAt', key: 'createdAt', render: (text) => new Date(text).toLocaleString() },
   ];
+
+  const handleRouteCalculated = (route) => {
+    setOptimizedRoute(route);
+  };
 
   return (
     <div>
@@ -100,9 +108,6 @@ export const ListTrips = () => {
         <Form.Item label="Fecha de Fin" name="endDate" rules={[{ required: true, message: 'Por favor ingrese la fecha de fin' }]}>
           <DatePicker showTime />
         </Form.Item>
-        <Form.Item label="Ruta" name="route" rules={[{ required: true, message: 'Por favor ingrese la ruta' }]}>
-          <Input placeholder="Ingrese la ruta" />
-        </Form.Item>
         <Form.Item label="Distancia Recorrida (km)" name="distanceTraveled" rules={[{ required: true, message: 'Por favor ingrese la distancia recorrida' }]}>
           <Input placeholder="Ingrese la distancia" />
         </Form.Item>
@@ -115,7 +120,10 @@ export const ListTrips = () => {
           </Button>
         </Form.Item>
       </Form>
-      <Table dataSource={trips || []} columns={columns} rowKey="id" />
+
+      <GoogleMapComponent onRouteCalculated={handleRouteCalculated} />  {/* Añadir el componente del mapa */}
+
+      <Table dataSource={trips} columns={columns} rowKey="id" />
     </div>
   );
 };
