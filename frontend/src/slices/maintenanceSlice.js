@@ -38,7 +38,7 @@ const maintenanceSlice = createSlice({
             state.status = status;
         },
 
-        editMaintenance: (state, action) => {
+        editMaintenanceById: (state, action) => {
             const { type, date, description, cost, status } = action.payload;
             state.type = type;
             state.date = date;
@@ -48,7 +48,7 @@ const maintenanceSlice = createSlice({
         },
 
 
-        deleteMaintenance: (state, action) => {
+        deleteMaintenanceById: (state, action) => {
             state.maintenances = state.maintenances.filter(
                 (maintenance) => maintenance.id !== action.payload
             );
@@ -56,3 +56,13 @@ const maintenanceSlice = createSlice({
 
     },
 });
+
+export const {
+    getMaintenances,
+    getMaintenanceById,
+    addMaintenance,
+    editMaintenanceById,
+    deleteMaintenanceById,
+} = maintenanceSlice.actions;
+
+export default maintenanceSlice.reducer;

@@ -7,6 +7,7 @@ import { ListVehicles } from "../pages/AdminPages/vehicles/ListVehicle";
 import { AddVehicle } from "../pages/AdminPages/vehicles/AddVehicle";
 import { ListTrips } from "../pages/AdminPages/trips/ListTrips";
 import { ListTires } from "../pages/AdminPages/tires/ListTires";
+import {ListMaintenance} from "../pages/AdminPages/maintenances/ListMaintenances";
 import LoginForm  from "../pages/AdminPages/login/LoginForm";
 import IndexForm  from "../pages/AdminPages/index/Index";
 import SignupForm  from "../pages/AdminPages/login/SignupForm";
@@ -22,10 +23,12 @@ export const AdminRoutes = () => {
             <Route path="/admin/users" element={<AdminLayouts><ListUsers /></AdminLayouts>} />
             <Route path="/admin/CreateTasks" element={<AdminLayouts><CreateDrivers /></AdminLayouts>} />
             <Route path="/admin/ListTasks" element={<AdminLayouts><ListTasks /></AdminLayouts>} />
+            <Route path="/admin/ListMaintenance" element={<AdminLayouts><ListMaintenance /></AdminLayouts>} />
             <Route path="/admin/listVehicles" element={<AdminLayouts><ListVehicles /></AdminLayouts>} />
             <Route path="/admin/addVehicles" element={<AdminLayouts><AddVehicle /></AdminLayouts>} />
             <Route path="/admin/ListTrips" element={<AdminLayouts><ListTrips /></AdminLayouts>} />
             <Route path="/admin/ListTires" element={<AdminLayouts><ListTires /></AdminLayouts>} />
+
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/"aaaaaaa element={<IndexForm />} />
