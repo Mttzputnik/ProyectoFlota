@@ -19,7 +19,7 @@ import { UploadOutlined } from "@ant-design/icons";
 
 const { confirm } = Modal;
 
-export const ListComponent = () => {
+export const ListUsers = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.users);
   const userApi = useMemo(() => new User(), []);
