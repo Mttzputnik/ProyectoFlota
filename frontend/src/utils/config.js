@@ -21,6 +21,19 @@ export const PATHS = {
         EDIT_TRIP: '/trips/edit',
         DELETE_TRIP: '/trips/delete',
         
+        NEW_OPTIMIZED_ROUTE: 'optimizedRoute/new-optimizedRoute',
+        CALCULATE_OPTIMIZED_ROUTE: '/optimizedRoute/calculate',
+        LIST_OPTIMIZED_ROUTE: '/optimizedRoute',
+        GET_OPTIMIZED_ROUTE: '/optimizedRoute/:id',
+        EDIT_OPTIMIZED_ROUTE: '/optimizedRoute/edit/:id',
+        DELETE_OPTIMIZED_ROUTE: '/optimizedRoute/delete/:id',
+
+        TIRES: '/tire',
+        NEW_TIRE: '/tire/new-tire',
+        EDIT_TIRE: '/tire/edit',
+        DELETE_TIRE: '/tire/delete',
+        LIST_TIRE: '/tire',
+        GET_TIRE: '/tire/:id',
     } 
 
 }
