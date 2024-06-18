@@ -38,6 +38,23 @@ const createTrip = async (req, res) => {
         travelTime,
       },
     });
+
+
+      // Crear la responsabilidad del usuario después de crear el trip
+      try {
+        const newUserResponsability = await prisma.userResponsability.create({
+          data: {
+            vehicleId,
+            userId,
+            estado: 'Activo'
+          },
+        });
+        console.log('User responsability created:', newUserResponsability);
+      } catch (error) {
+        console.log('Error al crear la responsabilidad del usuario:', error);
+      }
+
+
     res.status(200).json(newTrip);
   } catch (error) {
     console.log(error);

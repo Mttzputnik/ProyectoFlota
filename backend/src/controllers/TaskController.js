@@ -16,7 +16,7 @@ const listTask = async (req, res) => {
 
 // Crear un nuevo task
 const createTask = async (req, res) => {
-  const { idUser,idList, desc } = req.body;
+  const { idUser, idList, desc } = req.body;
 
   try {
     const newTask = await prisma.task.create({
@@ -41,7 +41,7 @@ const getTask = async (req, res) => {
       where: { id: id },
     });
     if (!task) {
-      return res.status(404).json({ error: `Task  no encontrado` });
+      return res.status(404).json({ error: `Task no encontrado` });
     }
     res.status(200).json(task);
   } catch (error) {
@@ -53,13 +53,13 @@ const getTask = async (req, res) => {
 // Actualizar un task por id
 const editTask = async (req, res) => {
   const { id } = req.params;
-  const { idUser,idList, desc } = req.body;
+  const { idUser, idList, desc } = req.body;
 
   try {
     const updateData = {
-        idUser,
-        idList, 
-        desc,
+      idUser,
+      idList,
+      desc,
     };
 
     const task = await prisma.task.update({

@@ -19,7 +19,7 @@ const app = express();
 app.use(cors());
 
 // Middleware para el manejo de datos
-app.use(express.json());
+app.use(express.json()); // Asegura el manejo de JSON
 app.use(express.urlencoded({ extended: true }));
 
 // Rutas para las operaciones del CRUD de usuarios
