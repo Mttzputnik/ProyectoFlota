@@ -40,6 +40,14 @@ export const PATHS = {
         EDIT_OPTIMIZED_ROUTE: '/optimizedRoute/edit/:id',
         DELETE_OPTIMIZED_ROUTE: '/optimizedRoute/delete/:id',
 
+        MAINTENANCE: '/maintenances',
+        NEW_MAINTENANCE: '/maintenances/new-maintenance',
+        EDIT_MAINTENANCE: '/maintenances/edit',
+        DELETE_MAINTENANCE: '/maintenances/delete',
+        LIST_MAINTENANCE: '/maintenances',
+        GET_MAINTENANCE: '/maintenances/:id',
+        
+
         TIRES: '/tire',
         NEW_TIRE: '/tire/new-tire',
         EDIT_TIRE: '/tire/edit',

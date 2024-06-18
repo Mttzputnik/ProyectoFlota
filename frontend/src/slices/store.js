@@ -5,6 +5,7 @@ import tripReducer from './tripslice'
 import tireReducer from './tireSlice';
 import taskReducer from './taskSlice';
 import listReducer from './listSlice';
+import maintenanceReducer from './maintenanceSlice';
 
 const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
         tire: tireReducer,
         task: taskReducer,
         list: listReducer,
+        maintenance: maintenanceReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck :false

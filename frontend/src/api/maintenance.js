@@ -1,5 +1,6 @@
 import { PATHS } from "../utils/config";
 
+
 export class Maintenance {
     BASE_PATH = PATHS.BASE_PATH;
     MAINTENANCE = PATHS.API_ROUTES.MAINTENANCE;
