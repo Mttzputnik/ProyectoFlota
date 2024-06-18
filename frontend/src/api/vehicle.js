@@ -5,6 +5,7 @@ export class Vehicle {
   VEHICLES = PATHS.API_ROUTES.VEHICLES;
   NEW_VEHICLE = PATHS.API_ROUTES.NEW_VEHICLE;
   EDIT_VEHICLE = PATHS.API_ROUTES.EDIT_VEHICLE;
+  WARRANTY = PATHS.API_ROUTES.WARRANTY;
 
   createVehicle = async (formData) => {
     try {
@@ -72,6 +73,35 @@ export class Vehicle {
       return await response.text();
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  createWarranty = async (vehicleId, start_date, end_date) => {
+    try {
+      const URL = `${this.BASE_PATH}${this.WARRANTY}/new-warranty`;
+      const params = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ vehicleId, start_date, end_date }),
+      };
+      const response = await fetch(URL, params);
+      return await response.json();
+    } catch (error) {
+      console.error("Error creating warranty:", error);
+      throw error;
+    }
+  };
+
+  getWarrantyByVehicleId = async (vehicleId) => {
+    try {
+      const URL = `${this.BASE_PATH}${this.WARRANTY}/${vehicleId}`;
+      const response = await fetch(URL);
+      return await response.json();
+    } catch (error) {
+      console.error(`Error getting warranty for vehicle with id ${vehicleId}:`, error);
+      throw error;
     }
   };
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { PATHS } from '../../../utils/config';
 
-const GOOGLE_MAPS_API_KEY = 'AIzaSyBkovZ-os66P_PTvj8ivu8FTUDEgOADrYI';
+const GOOGLE_MAPS_API_KEY = 'key';
 
 const GoogleMapComponent = ({ onRouteCalculated }) => {
   const mapRef = useRef(null);

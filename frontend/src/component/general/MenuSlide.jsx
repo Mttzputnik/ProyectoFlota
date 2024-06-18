@@ -1,7 +1,7 @@
 // MenuSlide.jsx
 import React, { useState } from 'react';
 import { Menu } from 'antd';
-import { CarOutlined, UserOutlined, OrderedListOutlined, HarmonyOSOutlined , ScanOutlined , AlertOutlined} from '@ant-design/icons';
+import { CarOutlined, UserOutlined, OrderedListOutlined, HarmonyOSOutlined, DingdingOutlined , ScanOutlined , AlertOutlined} from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import './MenuSlide.css';
 
@@ -61,18 +61,6 @@ export const MenuSlide = () => {
       ],
     },
     {
-      key: "sub3",
-      label: "Llantas",
-      icon: <HarmonyOSOutlined />,
-      children: [
-       
-        {
-          key: "listTires",
-          label: "Lista de llantas",
-        },
-      ],
-    },
-    {
       key: "sub4",
       label: "Mantenimiento",
       icon: <AlertOutlined />,
@@ -100,9 +88,15 @@ export const MenuSlide = () => {
       icon: <ScanOutlined/>,
       children: [
         {
+          icon: <DingdingOutlined />,
           key: "ListTrips",
           label: "Viajes",
-        }
+        },
+        {
+          icon: <HarmonyOSOutlined />,
+          key: "listTires",
+          label: "Lista de llantas",
+        },
       ],
       },
       {
