@@ -21,8 +21,8 @@ model User {
   avatar           String?
   active_user      Boolean
   current_password String
-  createdAt        String
-  updatedAt        String 
+  createdAt        DateTime
+  updatedAt        DateTime 
   role             String
   tasks            Task[]
   trips              Trip[]

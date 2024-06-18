@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useMemo} from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Vehicle } from "../../../api/vehicle";
-import { getVehicles, editVehicleById, deleteVehicleById } from "../../../slices/vehicleSlice";
+import { getVehicles, editVehicleById, deleteVehicleById , } from "../../../slices/vehicleSlice";
 import {
   Table,
   Image,
@@ -15,6 +15,7 @@ import {
   Button,
 } from "antd";
 import { EditOutlined, DeleteOutlined, UploadOutlined } from "@ant-design/icons";
+import { calculateDaysRemaining } from "../../../utils/vehicleUtils";
 
 const { confirm } = Modal;
 
@@ -24,6 +25,7 @@ export const ListVehicles = () => {
   const vehicleApi = useMemo(() => new Vehicle(), []);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
+  const [selectedVehicleWarranty, setSelectedVehicleWarranty] = useState(null); 
 
   useEffect(() => {
     const fetchVehicles = async () => {
@@ -36,11 +38,22 @@ export const ListVehicles = () => {
     };
 
     fetchVehicles();
-  }, [vehicleApi , dispatch]); 
+  }, [vehicleApi, dispatch]);
+
+  // Función para obtener la garantía por ID de vehículo
+  const fetchVehicleWarranty = async (vehicleId) => {
+    try {
+      const warrantyData = await vehicleApi.getWarrantyByVehicleId(vehicleId);
+      setSelectedVehicleWarranty(warrantyData);
+    } catch (error) {
+      console.error("Failed to fetch vehicle warranty", error);
+    }
+  };
 
   const handleEdit = (id) => {
     const vehicle = vehicles.find((vehicle) => vehicle.id === id);
     setSelectedVehicle(vehicle);
+    fetchVehicleWarranty(id);
     setIsModalVisible(true);
   };
 
@@ -67,6 +80,7 @@ export const ListVehicles = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
     setSelectedVehicle(null);
+    setSelectedVehicleWarranty(null); 
   };
 
   const handleOk = () => {
@@ -76,6 +90,7 @@ export const ListVehicles = () => {
         dispatch(editVehicleById({ vehicleId: selectedVehicle.id, updatedVehicleData: result }));
         setIsModalVisible(false);
         setSelectedVehicle(null);
+        setSelectedVehicleWarranty(null); 
       })
       .catch((error) => {
         console.error("Failed to edit vehicle", error);
@@ -109,7 +124,7 @@ export const ListVehicles = () => {
       title: "Imagen",
       dataIndex: "image",
       key: "image",
-      render: (text, record) => <Image src={record.image} />
+      render: (text, record) => <Image src={record.image} />,
     },
     {
       title: "Modelo",
@@ -130,9 +145,24 @@ export const ListVehicles = () => {
       title: "Activo",
       dataIndex: "status",
       key: "status",
-      render: (text, record) => (
-        <span>{record.status ? "Sí" : "No"}</span>
-      ),
+      render: (text, record) => <span>{record.status ? "Sí" : "No"}</span>,
+    },
+    {
+      title: "Garantía",
+      key: "warranty",
+      render: (text, record) => {
+        console.log("record", record.Warranty && record.Warranty.length);
+        if (record.Warranty && record.Warranty.length > 0) {
+          const warranty = record.Warranty[0]; 
+          const daysRemaining = calculateDaysRemaining(warranty.end_date);
+          return (
+            <Tooltip title={`Días restantes: ${daysRemaining}`}>
+              <span>{`${warranty.start_date} - ${warranty.end_date}`}</span>
+            </Tooltip>
+          );
+        }
+        return <span>No tiene garantía</span>;
+      },
     },
     {
       title: "Acciones",
@@ -165,7 +195,8 @@ export const ListVehicles = () => {
           title="Editar Vehículo"
           visible={isModalVisible}
           onOk={handleOk}
-          onCancel={handleCancel}>
+          onCancel={handleCancel}
+        >
           <Form>
             <Form.Item label="Modelo">
               <Input
@@ -199,10 +230,17 @@ export const ListVehicles = () => {
                 accept="image/*"
                 beforeUpload={() => false}
                 onChange={handleUploadChange}
-                fileList={[]}>
+                fileList={[]}
+              >
                 <Button icon={<UploadOutlined />}>Seleccionar archivo</Button>
               </Upload>
             </Form.Item>
+            {/* Mostrar la garantía seleccionada */}
+            {selectedVehicleWarranty && (
+              <Form.Item label="Garantía">
+                <span>{`${selectedVehicleWarranty.start_date} - ${selectedVehicleWarranty.end_date}`}</span>
+              </Form.Item>
+            )}
           </Form>
         </Modal>
       )}
