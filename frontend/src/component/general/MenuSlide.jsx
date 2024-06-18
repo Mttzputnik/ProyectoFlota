@@ -31,6 +31,9 @@ export const MenuSlide = () => {
     else if (key === 'listMaintenance') {
       navigate('/admin/ListMaintenance');
     }
+    else if (key === 'CreateTasks') {
+      navigate('/admin/CreateTasks');
+    }
   };
 
   const items = [
@@ -82,6 +85,10 @@ export const MenuSlide = () => {
           key: "listTasks",
           label: "Tareas de vehículos",
         },
+        {
+          key: "CreateTasks",
+          label: "Crear tareas",
+        }
       ],
     },
     {
